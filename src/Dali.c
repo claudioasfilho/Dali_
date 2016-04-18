@@ -254,7 +254,7 @@ void DaliFrameStop()
 
 void DaliTXStateMachine(uint8_t address, uint8_t Ddata)
 {
-	DALI_TXFRAME States;
+	DALI_FRAME States;
 
 	SetDaliOutputPin();			//The Line is Normally High
 	States = START;
@@ -331,6 +331,113 @@ bit GetDaliOutputPin()
  *********************************************************************************
  *********************************************************************************/
 uint8_t BusQuietCounter;
+
+bit _1stQ;
+bit _2ndQ;
+bit _3rdQ;
+bit _4thQ;
+
+static xdata DALI_FRAME State = IDLE;
+static xdata DALI_DEMOD bitState = _1qB;
+
+void DaliRXDecoding()
+{
+	switch (State)
+
+	   		{
+
+				case IDLE:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
+		   					{
+
+
+		   						switch (bitState)
+		   						{
+		   							case _1qB:
+		   							{
+				   					 	if((GetDaliIntputPin()==0)) //This is Triggered by the EXT_INT0 Interrupt
+				   						{
+
+				   					 		_1stQ = GetDaliIntputPin();
+				   							ReloadDaliRxTimer(TMH, TML);
+				   							EnableDaliRxTimerInt();
+				   							StartDaliRxTimer();
+				   							bitState = _2qB;
+				   							//SetDaliInputPinPolarity(ACTIVE_HIGH);
+
+				   						}
+		   								break;
+		   							}
+
+
+		   						}
+
+
+
+
+
+		   						break;
+		   					}
+
+
+	   			case START:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
+	   					{
+	   						break;
+	   					}
+
+	   			case DATA:
+	   					{
+
+	   					}//End of case DATA:
+
+	   		}//End of Switch State:
+
+
+
+#if 0
+
+   static xdata uint8_t intcounter = 0;
+   static xdata uint8_t debugcounter = 0;
+
+   //if((GetDaliIntputPin()==0) &&(intcounter==0))
+ 	if((GetBusQuietCounter()>1)&&(GetDaliIntputPin()==0) &&(intcounter==0))
+	{
+
+		_1stHalf=GetDaliIntputPin();
+		SetDaliInputPinPolarity(ACTIVE_HIGH);
+
+		if(debugcounter++==9)
+		{
+			NOP();//LED2^=1;
+		}
+
+
+	}
+
+	if ((intcounter++==1))
+	{
+		_2ndHalf=GetDaliIntputPin();
+		SetDaliInputPinPolarity(ACTIVE_LOW);
+
+		if ((_1stHalf==0) && (_2ndHalf==1))// && (GetDaliRxErrorFlag()==0))			// Start bit received
+			{
+				DisableInt1 ();
+				StopDaliRxTimer();
+
+				//It will reload a one period worth of time, so it will start sampling on the next bit
+				ReloadDaliRxTimer(TMH, TML);
+				EnableDaliRxTimerInt();
+				StartDaliRxTimer();
+				State = DATA;
+
+			}
+		intcounter=0;
+		_1stHalf = _2ndHalf =0;
+	}
+#endif
+
+
+}
+
 
 bit GetDaliIntputPin()
 {

@@ -50,12 +50,24 @@ typedef union daliflags
 
 typedef enum
 			{
-				START=0,
+				IDLE=0,
+				START,
 				ADDRESS,
 				DATA,
 				STOP,
 				END
-				} DALI_TXFRAME;
+				} DALI_FRAME;
+
+typedef enum
+			{
+				_1qB=0,	//First Quarter of the Bit
+				_2qB,
+				_3qB,
+				_4qB
+			} DALI_DEMOD;
+
+
+
 typedef enum
 {
 	ACTIVE_LOW=0,
@@ -104,6 +116,8 @@ bit GetDaliStopFlag();
 
 
 //Dali RX
+
+void DaliRXDecoding();
 
 void ReloadDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
 void StartDaliRxTimer();
