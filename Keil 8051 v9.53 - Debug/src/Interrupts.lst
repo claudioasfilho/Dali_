@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/18/2016 16:32:03 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/18/2016 16:44:36 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERRUPTS
@@ -41,7 +41,7 @@ line level    source
   27          //bit _1stHalf;
   28          //bit _2ndHalf;
   29          
-  30          SI_SBIT (LED2,SFR_P1, 4);                          //PB0 Switch Definition
+  30          
   31          
   32          
   33          
@@ -63,10 +63,10 @@ line level    source
   49   1      }
   50          
   51          
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/18/2016 16:32:03 PAGE 2   
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/18/2016 16:44:36 PAGE 2   
 
   52          //-----------------------------------------------------------------------------
-  53          // Dali RX TimerTIMER1_ISR
+  53          // Dali RX Timer TIMER1_ISR
   54          //-----------------------------------------------------------------------------
   55          //
   56          // TIMER1 ISR Content goes here. Remember to clear flag bits:

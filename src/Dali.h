@@ -67,7 +67,6 @@ typedef enum
 			} DALI_DEMOD;
 
 
-
 typedef enum
 {
 	ACTIVE_LOW=0,
@@ -123,6 +122,8 @@ void ReloadDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
 void StartDaliRxTimer();
 void StopDaliRxTimer();
 uint16_t GetDaliRxTimer();
+void ReloadnStartDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
+void StopnDisableDaliRxTimer();
 
 bit GetDaliIntputPin();
 void QueryDaliBus();

@@ -44,7 +44,7 @@
 #include "InitDevice.h"
 #include "Dali.h"
 
-
+SI_SBIT (LED2,SFR_P1, 4);			   //PB0 Switch Definition
 
 
 //bit MDone;
@@ -94,7 +94,7 @@ bit GetMDOutput()
 {
  return DaliFlags.flag.Output;
 }
-SI_SBIT (LED2,SFR_P1, 4);			   //PB0 Switch Definition
+
 
 void ManchesterEncoder (uint8_t input)
 {
@@ -352,22 +352,73 @@ void DaliRXDecoding()
 
 		   						switch (bitState)
 		   						{
-		   							case _1qB:
+		   							case _1qB: //This is Triggered by the INT1_ISR
 		   							{
-				   					 	if((GetDaliIntputPin()==0)) //This is Triggered by the EXT_INT0 Interrupt
+				   					 	if((GetDaliIntputPin()==0))
 				   						{
 
 				   					 		_1stQ = GetDaliIntputPin();
-				   							ReloadDaliRxTimer(TMH, TML);
-				   							EnableDaliRxTimerInt();
-				   							StartDaliRxTimer();
+				   					 		ReloadnStartDaliRxTimer(STMH, STML);
 				   							bitState = _2qB;
-				   							//SetDaliInputPinPolarity(ACTIVE_HIGH);
-
+				   							LED2^=1;
 				   						}
 		   								break;
 		   							}
 
+		   							case _2qB: //This is Triggered by the TIMER1_ISR
+		   							{
+				   					 	if((GetDaliIntputPin()==0))
+				   						{
+
+				   					 		_2ndQ = GetDaliIntputPin();
+				   							StopnDisableDaliRxTimer();
+				   							SetDaliInputPinPolarity(ACTIVE_HIGH);
+				   							EnableInt1();
+				   							bitState = _3qB;
+				   							LED2^=1;
+				   						}
+				   					 	else
+				   					 	{
+				   					 		StopnDisableDaliRxTimer();
+				   					 	bitState = _1qB;
+				   					 	}
+		   								break;
+		   							}
+
+		   							case _3qB: //This is Triggered by the TIMER1_ISR
+		   							{
+		   								if((GetDaliIntputPin()==1))
+		   								{
+
+		   									_1stQ = GetDaliIntputPin();
+		   									ReloadnStartDaliRxTimer(STMH, STML);
+		   									bitState = _4qB;
+				   							LED2^=1;
+
+		   								}
+		   								break;
+
+		   							}
+		   							case _4qB: //This is Triggered by the TIMER1_ISR
+		   							{
+				   					 	if((GetDaliIntputPin()==1))
+				   						{
+
+				   					 		_4thQ = GetDaliIntputPin();
+				   							StopnDisableDaliRxTimer();
+				   							SetDaliInputPinPolarity(ACTIVE_LOW);
+				   							EnableInt1();
+				   							bitState = _1qB;
+				   							LED2^=1;
+				   							NOP();
+				   						}
+				   					 	else
+				   					 	{
+				   					 		StopnDisableDaliRxTimer();
+				   					 		bitState = _1qB;
+				   					 	}
+		   								break;
+		   							}
 
 		   						}
 
@@ -460,6 +511,22 @@ void ReloadDaliRxTimer(uint8_t reloadH, uint8_t reloadL)
 	TH1 = reloadH;
 	TL1 = reloadL;
 }
+
+void ReloadnStartDaliRxTimer(uint8_t reloadH, uint8_t reloadL)
+{
+	TH1 = reloadH;
+	TL1 = reloadL;
+	EnableDaliRxTimerInt();
+	StartDaliRxTimer();
+}
+
+void StopnDisableDaliRxTimer()
+{
+
+	StopDaliRxTimer();
+	DisableDaliRxTimerInt();
+}
+
 
 void StartDaliRxTimer()
 {

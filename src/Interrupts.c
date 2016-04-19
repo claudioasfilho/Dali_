@@ -27,7 +27,7 @@
 //bit _1stHalf;
 //bit _2ndHalf;
 
-SI_SBIT (LED2,SFR_P1, 4);			   //PB0 Switch Definition
+
 
 
 
@@ -50,7 +50,7 @@ SI_INTERRUPT (INT1_ISR, INT1_IRQn)
 
 
 //-----------------------------------------------------------------------------
-// Dali RX TimerTIMER1_ISR
+// Dali RX Timer TIMER1_ISR
 //-----------------------------------------------------------------------------
 //
 // TIMER1 ISR Content goes here. Remember to clear flag bits:
