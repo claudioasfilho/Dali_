@@ -29,9 +29,9 @@ void main (void)
 
 
    while (1) {
-//	   DALI_OUT=1;
+
 	   if (PB0_SW==0) {
-		  // ManchesterEncoder(0xf0);
+
 		  DaliTXStateMachine(0xf0, 0x0f);
 		   for(fcounter=0; fcounter<0xfff; fcounter++);
 	   }

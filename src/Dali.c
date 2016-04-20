@@ -354,7 +354,7 @@ DALI_FRAME startconditionbitDemodulation()
 				//_1stQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
-				//ToogleTestLed();
+				ToogleTestLed();
 			}
 			break;
 		}
@@ -369,7 +369,7 @@ DALI_FRAME startconditionbitDemodulation()
 				SetDaliInputPinPolarity(ACTIVE_HIGH);
 				EnableInt1();
 				bitState = _3qB;
-				//ToogleTestLed();
+				ToogleTestLed();
 			}
 			else
 			{
@@ -387,7 +387,7 @@ DALI_FRAME startconditionbitDemodulation()
 				//_3rdQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
-				//ToogleTestLed();
+				ToogleTestLed();
 
 			}
 			break;
@@ -402,7 +402,7 @@ DALI_FRAME startconditionbitDemodulation()
 				DisableInt1();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
-				//ToogleTestLed();
+				ToogleTestLed();
 				return ADDRESS; //Processing is done. It resets this state machine and moves the main state machine to the next state
 			}
 			else
@@ -566,7 +566,7 @@ void DaliRXDecoding()
 				case IDLE:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
 		   					{
 		   						if (GetBusQuietCounter()>1) State = START;
-		   						address=0;
+		   						address.Abyte=0;
 		   						//This Jumps straight to the next State on the State Machine so we don't loose a cycle
 		   					}
 
@@ -580,53 +580,54 @@ void DaliRXDecoding()
 	   					{
 
 	   						if (bitDemodulation())	//Is Demodulation done for the bit?
-	   						{
-	   							bitread = isbitHighorLow();
+								{
+									bitread = isbitHighorLow();
 
-	   							if (bitread!=-1)
-	   							{
-	   								switch (bitscounter)
-	   								{
-	   									case 0: address.nybble.BB0 = bitread;
-	   											break;
+									if (bitread!=-1)
+									{
+										switch (bitscounter)
+										{
+											case 0: address.nybble.BB0 = bitread;
+													break;
 
-	   									case 1: address.nybble.BB1 = bitread;
-	   											break;
+											case 1: address.nybble.BB1 = bitread;
+													break;
 
-	   									case 2: address.nybble.BB2 = bitread;
-	   											break;
+											case 2: address.nybble.BB2 = bitread;
+													break;
 
-	   									case 3: address.nybble.BB3 = bitread;
-	   											break;
+											case 3: address.nybble.BB3 = bitread;
+													break;
 
-	   									case 4: address.nybble.BB4 = bitread;
-	   											break;
+											case 4: address.nybble.BB4 = bitread;
+													break;
 
-	   									case 5: address.nybble.BB5 = bitread;
-	   											break;
+											case 5: address.nybble.BB5 = bitread;
+													break;
 
-	   									case 6: address.nybble.BB6 = bitread;
-	   											break;
+											case 6: address.nybble.BB6 = bitread;
+													break;
 
-	   									case 7: address.nybble.BB7 = bitread;
-	   											break;
-	   								}
-	   								if(bitscounter--==0)
-	   								{
-	   									NOP();
-	   									bitscounter=7;
-	   									aaddress= address.Abyte;
-	   								}
+											case 7: address.nybble.BB7 = bitread;
+													break;
+										}
+										if(bitscounter--==0)
+										{
+											NOP();
+											bitscounter=7;
+											aaddress= address.Abyte;
+										}
 
-	   							}
+									}
 
-	   							else //If any of the bits is corrupted, the device goes to IDLE MODE
-	   							{
-	   								State = IDLE;
-	   								//#warning "Add_a_flag_indicating_error"
-	   							}
+									else //If any of the bits is corrupted, the device goes to IDLE MODE
+									{
+										State = IDLE;
+										//#warning "Add_a_flag_indicating_error"
+									}
+							}
+	   						break;
 	   					}
-
 	   			case DATA:
 	   					{
 
@@ -634,11 +635,10 @@ void DaliRXDecoding()
 
 	   			default: State=IDLE;
 
-	   		}//End of Switch State:
 
 
+	   		}
 }
-
 
 
 bit GetDaliIntputPin()
