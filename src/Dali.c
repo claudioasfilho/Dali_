@@ -354,7 +354,7 @@ DALI_FRAME startconditionbitDemodulation()
 				//_1stQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
-				ToogleTestLed();
+				//ToogleTestLed();
 			}
 			break;
 		}
@@ -369,7 +369,7 @@ DALI_FRAME startconditionbitDemodulation()
 				SetDaliInputPinPolarity(ACTIVE_HIGH);
 				EnableInt1();
 				bitState = _3qB;
-				ToogleTestLed();
+				//ToogleTestLed();
 			}
 			else
 			{
@@ -387,7 +387,7 @@ DALI_FRAME startconditionbitDemodulation()
 				//_3rdQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
-				ToogleTestLed();
+				//ToogleTestLed();
 
 			}
 			break;
@@ -402,7 +402,7 @@ DALI_FRAME startconditionbitDemodulation()
 				DisableInt1();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
-				ToogleTestLed();
+				//ToogleTestLed();
 				return ADDRESS; //Processing is done. It resets this state machine and moves the main state machine to the next state
 			}
 			else
@@ -438,7 +438,7 @@ bit bitDemodulation()
 				_1stQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
-				ToogleTestLed();
+				ToogleTestLed1();
 				break;
 			}
 
@@ -447,7 +447,7 @@ bit bitDemodulation()
 				_2ndQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _3qB;
-				ToogleTestLed();
+				ToogleTestLed2();
 				break;
 			}
 
@@ -457,7 +457,7 @@ bit bitDemodulation()
 				_3rdQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
-				ToogleTestLed();
+				ToogleTestLed3();
 				break;
 
 			}
@@ -467,7 +467,7 @@ bit bitDemodulation()
 				_4thQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
-				ToogleTestLed();
+				ToogleTestLed4();
 				return 1; //Processing is done. It resets this state machine and informs user the bit information is available
 				break;
 			}
@@ -484,10 +484,10 @@ int isbitHighorLow()
 	if ((_1stQ==DALI_LOGIC_0) && (_2ndQ==DALI_LOGIC_0) && (_3rdQ==DALI_LOGIC_1) && (_4thQ==DALI_LOGIC_1)) output = 1;
 	else if ((_1stQ==DALI_LOGIC_1) && (_2ndQ==DALI_LOGIC_1) && (_3rdQ==DALI_LOGIC_0) && (_4thQ==DALI_LOGIC_0)) output = 0;
 
-	_1stQ=0;
+/*	_1stQ=0;
 	_2ndQ=0;
 	_3rdQ=0;
-	_4thQ=0;
+	_4thQ=0;*/
 
 	return output;
 }
@@ -552,9 +552,10 @@ int8_t ReadDaliByte()
 void DaliRXDecoding()
 {
 	static xdata DALI_FRAME State = IDLE;
-	static xdata int8_t aaddress;
+	static xdata uint8_t Address;
+	static xdata uint8_t Dataa;
 
-	static xdata BITS_BYTE address;
+	static xdata BITS_BYTE DaliData;
 	static xdata uint8_t bitscounter=7;
 	int bitread=0;
 
@@ -566,7 +567,7 @@ void DaliRXDecoding()
 				case IDLE:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
 		   					{
 		   						if (GetBusQuietCounter()>1) State = START;
-		   						address.Abyte=0;
+		   						DaliData.Abyte=0;
 		   						//This Jumps straight to the next State on the State Machine so we don't loose a cycle
 		   					}
 
@@ -587,35 +588,45 @@ void DaliRXDecoding()
 									{
 										switch (bitscounter)
 										{
-											case 0: address.nybble.BB0 = bitread;
+											case 0: DaliData.nybble.BB0 = bitread;
 													break;
 
-											case 1: address.nybble.BB1 = bitread;
+											case 1: DaliData.nybble.BB1 = bitread;
 													break;
 
-											case 2: address.nybble.BB2 = bitread;
+											case 2: DaliData.nybble.BB2 = bitread;
 													break;
 
-											case 3: address.nybble.BB3 = bitread;
+											case 3: DaliData.nybble.BB3 = bitread;
 													break;
 
-											case 4: address.nybble.BB4 = bitread;
+											case 4: DaliData.nybble.BB4 = bitread;
 													break;
 
-											case 5: address.nybble.BB5 = bitread;
+											case 5: DaliData.nybble.BB5 = bitread;
 													break;
 
-											case 6: address.nybble.BB6 = bitread;
+											case 6: DaliData.nybble.BB6 = bitread;
 													break;
 
-											case 7: address.nybble.BB7 = bitread;
+											case 7: DaliData.nybble.BB7 = bitread;
 													break;
 										}
 										if(bitscounter--==0)
 										{
-											NOP();
+
 											bitscounter=7;
-											aaddress= address.Abyte;
+											//if (State==ADDRESS)
+											{
+												Address= DaliData.Abyte;
+												State=DATA;
+											}
+											/*else
+											{
+												Dataa= DaliData.Abyte;
+												NOP();
+											}*/
+
 										}
 
 									}
@@ -623,15 +634,75 @@ void DaliRXDecoding()
 									else //If any of the bits is corrupted, the device goes to IDLE MODE
 									{
 										State = IDLE;
-										//#warning "Add_a_flag_indicating_error"
+										#warning "Add_a_flag_indicating_error"
 									}
 							}
 	   						break;
 	   					}
-	   			case DATA:
-	   					{
 
-	   					}//End of case DATA:
+	   			case DATA:
+	   				   					{
+
+	   				   						if (bitDemodulation())	//Is Demodulation done for the bit?
+	   											{
+	   												bitread = isbitHighorLow();
+
+	   												if (bitread!=-1)
+	   												{
+	   													switch (bitscounter)
+	   													{
+	   														case 0: DaliData.nybble.BB0 = bitread;
+	   																break;
+
+	   														case 1: DaliData.nybble.BB1 = bitread;
+	   																break;
+
+	   														case 2: DaliData.nybble.BB2 = bitread;
+	   																break;
+
+	   														case 3: DaliData.nybble.BB3 = bitread;
+	   																break;
+
+	   														case 4: DaliData.nybble.BB4 = bitread;
+	   																break;
+
+	   														case 5: DaliData.nybble.BB5 = bitread;
+	   																break;
+
+	   														case 6: DaliData.nybble.BB6 = bitread;
+	   																break;
+
+	   														case 7: DaliData.nybble.BB7 = bitread;
+	   																break;
+	   													}
+	   													if(bitscounter--==0)
+	   													{
+
+	   														bitscounter=7;
+	   														/*if (State==ADDRESS)
+	   														{
+	   															Address= DaliData.Abyte;
+	   															State=DATA;
+	   														}
+	   														else*/
+	   														{
+	   															Dataa= DaliData.Abyte;
+	   															NOP();
+	   														}
+
+	   													}
+
+	   												}
+
+	   												else //If any of the bits is corrupted, the device goes to IDLE MODE
+	   												{
+	   													State = IDLE;
+	   													NOP();
+	   													#warning "Add_a_flag_indicating_error"
+	   												}
+	   										}
+	   				   						break;
+	   				   					}
 
 	   			default: State=IDLE;
 

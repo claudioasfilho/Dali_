@@ -12,7 +12,7 @@
 #define TML	0x2B
 
 #define STMH TMH
-#define STML 0x95
+#define STML 0x96//0x95
 //-----------------------------------------------------------------------------
 #include <SI_EFM8UB1_Register_Enums.h>
 //#include "InitDevice.h"
@@ -84,9 +84,17 @@ typedef enum
 SI_SBIT (PB0_SW,SFR_P0, 2);			   //PB0 Switch Definition
 SI_SBIT (DALI_OUT, SFR_P0, 0);		   //Dali Output Pin
 SI_SBIT (DALI_IN, SFR_P0, 7);		   //Dali Input Pin
-SI_SBIT (LED2,SFR_P1, 4);			   //Test LED
 
-#define ToogleTestLed() LED2^=1;
+SI_SBIT (LED1,SFR_P1, 4);			   //Test LED
+SI_SBIT (LED2,SFR_P1, 5);			   //Test LED
+SI_SBIT (LED3,SFR_P1, 6);			   //Test LED
+SI_SBIT (LED4,SFR_P3, 1);			   //Test LED
+SI_SBIT (LED5,SFR_P0, 4);			   //Test LED
+
+#define ToogleTestLed1() LED1^=1;LED5^=1;
+#define ToogleTestLed2() LED2^=1;LED5^=1;
+#define ToogleTestLed3() LED3^=1;LED5^=1;
+#define ToogleTestLed4() LED4^=1;LED5^=1;
 
 /* Manchester Encoder Methods */
 
