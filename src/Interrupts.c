@@ -82,7 +82,7 @@ SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
 
 	ReloadDaliTxTimer(TMH, TML);
 	DaliTxHandler();
-	QueryDaliBus();
+	IsDaliBusQuiet();
 
 }
 

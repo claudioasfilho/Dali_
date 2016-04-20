@@ -73,6 +73,9 @@ typedef enum
 	ACTIVE_HIGH=1
 }INTPOLARITY;
 
+#define DALI_LOGIC_1 1
+#define DALI_LOGIC_0 0
+
 //-----------------------------------------------------------------------------
 // Pin Definitions
 //-----------------------------------------------------------------------------
@@ -81,7 +84,9 @@ typedef enum
 SI_SBIT (PB0_SW,SFR_P0, 2);			   //PB0 Switch Definition
 SI_SBIT (DALI_OUT, SFR_P0, 0);		   //Dali Output Pin
 SI_SBIT (DALI_IN, SFR_P0, 7);		   //Dali Input Pin
+SI_SBIT (LED2,SFR_P1, 4);			   //Test LED
 
+#define ToogleTestLed() LED2^=1;
 
 /* Manchester Encoder Methods */
 
@@ -126,7 +131,7 @@ void ReloadnStartDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
 void StopnDisableDaliRxTimer();
 
 bit GetDaliIntputPin();
-void QueryDaliBus();
+void IsDaliBusQuiet();
 void IncBusQuietCounter();
 void ClearBusQuietCounter();
 uint8_t GetBusQuietCounter();
