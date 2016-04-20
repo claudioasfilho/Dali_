@@ -491,7 +491,7 @@ int isbitHighorLow()
 
 	return output;
 }
-
+/*
 int8_t ReadDaliByte()
 {
 	static xdata BITS_BYTE address;
@@ -547,12 +547,16 @@ int8_t ReadDaliByte()
 		return -2;		//returns -2 while collecting all the bits from the Dali Byte
 
 	}
-}
+}*/
 
 void DaliRXDecoding()
 {
 	static xdata DALI_FRAME State = IDLE;
-	static xdata int8_t address;
+	static xdata int8_t aaddress;
+
+	static xdata BITS_BYTE address;
+	static xdata uint8_t bitscounter=7;
+	int bitread=0;
 
 
 	switch (State)
@@ -574,20 +578,53 @@ void DaliRXDecoding()
 
 	   			case ADDRESS:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
 	   					{
-	   						address= ReadDaliByte();
 
-	   						if ((address!=-2)&&(address!=-1))	//Is Demodulation done for the bit?
+	   						if (bitDemodulation())	//Is Demodulation done for the bit?
 	   						{
-	   							NOP();
+	   							bitread = isbitHighorLow();
+
+	   							if (bitread!=-1)
+	   							{
+	   								switch (bitscounter)
+	   								{
+	   									case 0: address.nybble.BB0 = bitread;
+	   											break;
+
+	   									case 1: address.nybble.BB1 = bitread;
+	   											break;
+
+	   									case 2: address.nybble.BB2 = bitread;
+	   											break;
+
+	   									case 3: address.nybble.BB3 = bitread;
+	   											break;
+
+	   									case 4: address.nybble.BB4 = bitread;
+	   											break;
+
+	   									case 5: address.nybble.BB5 = bitread;
+	   											break;
+
+	   									case 6: address.nybble.BB6 = bitread;
+	   											break;
+
+	   									case 7: address.nybble.BB7 = bitread;
+	   											break;
+	   								}
+	   								if(bitscounter--==0)
+	   								{
+	   									NOP();
+	   									bitscounter=7;
+	   									aaddress= address.Abyte;
+	   								}
 
 	   							}
 
-	   							else if (address==-1) //If any of the bits is corrupted, the device goes to IDLE MODE
+	   							else //If any of the bits is corrupted, the device goes to IDLE MODE
 	   							{
 	   								State = IDLE;
-									#warning "Add_a_flag_indicating_error"
+	   								//#warning "Add_a_flag_indicating_error"
 	   							}
-	   						break;
 	   					}
 
 	   			case DATA:
@@ -598,50 +635,6 @@ void DaliRXDecoding()
 	   			default: State=IDLE;
 
 	   		}//End of Switch State:
-
-
-
-#if 0
-
-   static xdata uint8_t intcounter = 0;
-   static xdata uint8_t debugcounter = 0;
-
-   //if((GetDaliIntputPin()==0) &&(intcounter==0))
- 	if((GetBusQuietCounter()>1)&&(GetDaliIntputPin()==0) &&(intcounter==0))
-	{
-
-		_1stHalf=GetDaliIntputPin();
-		SetDaliInputPinPolarity(ACTIVE_HIGH);
-
-		if(debugcounter++==9)
-		{
-			NOP();//ToogleTestLed();
-		}
-
-
-	}
-
-	if ((intcounter++==1))
-	{
-		_2ndHalf=GetDaliIntputPin();
-		SetDaliInputPinPolarity(ACTIVE_LOW);
-
-		if ((_1stHalf==0) && (_2ndHalf==1))// && (GetDaliRxErrorFlag()==0))			// Start bit received
-			{
-				DisableInt1 ();
-				StopDaliRxTimer();
-
-				//It will reload a one period worth of time, so it will start sampling on the next bit
-				ReloadDaliRxTimer(TMH, TML);
-				EnableDaliRxTimerInt();
-				StartDaliRxTimer();
-				State = DATA;
-
-			}
-		intcounter=0;
-		_1stHalf = _2ndHalf =0;
-	}
-#endif
 
 
 }
