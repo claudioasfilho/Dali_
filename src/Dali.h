@@ -40,7 +40,7 @@ typedef union daliflags
 								uint8_t Output:1;
 								uint8_t Stop:1;
 								uint8_t Error:1;
-								uint8_t NU1:1;
+								uint8_t Dataready:1;
 								uint8_t NU2:1;
 								uint8_t NU3:1;
 								uint8_t NU4:1;
@@ -61,6 +61,7 @@ typedef enum
 				ADDRESS,
 				DATA,
 				STOP,
+				ERRORRESET,
 				END
 				} DALI_FRAME;
 

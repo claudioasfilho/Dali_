@@ -52,7 +52,8 @@
 //bit DaliStopFlag;
 //bit DaliErrorFlag;
 
-DALIFLAGS DaliFlags;
+static xdata DALIFLAGS DaliFlags;
+static xdata DALIRXREGISTERS DaliRXReg;
 
 /*********************************************************************************
  *********************************************************************************
@@ -337,6 +338,7 @@ bit _2ndQ;
 bit _3rdQ;
 bit _4thQ;
 
+static xdata DALI_FRAME ERRORLOG = IDLE;
 
 
 
@@ -423,7 +425,85 @@ DALI_FRAME startconditionbitDemodulation()
 	return START; //Still Processing the Bit
 }
 
+DALI_FRAME stopconditionbitverify()
+{
+	static xdata DALI_DEMOD bitState = _1qB;
 
+	switch (bitState)
+	{
+		case _1qB: //This is Triggered by the TIMER1_ISR
+		{
+			if((GetDaliIntputPin()==DALI_LOGIC_1))
+			{
+
+				_1stQ = GetDaliIntputPin();
+				ReloadDaliRxTimer(TMH, TML);
+				bitState = _2qB;
+				ToogleTestLed1();
+			}
+			else //If the bit is corrupted, the device goes to ERRORRESET MODE
+			{
+				return ERRORRESET;
+			}
+			break;
+		}
+
+		case _2qB: //This is Triggered by the TIMER1_ISR
+		{
+			if((GetDaliIntputPin()==DALI_LOGIC_1))
+			{
+
+				_2ndQ = GetDaliIntputPin();
+				ReloadDaliRxTimer(TMH, TML);
+				bitState = _3qB;
+				ToogleTestLed1();
+			}
+			else //If the bit is corrupted, the device goes to ERRORRESET MODE
+			{
+				return ERRORRESET;
+			}
+			break;
+		}
+
+		case _3qB: //This is Triggered by the TIMER1_ISR
+		{
+			if((GetDaliIntputPin()==DALI_LOGIC_1))
+			{
+
+				_3rdQ = GetDaliIntputPin();
+				ReloadDaliRxTimer(TMH, TML);
+				bitState = _4qB;
+				ToogleTestLed1();
+
+			}
+			else //If the bit is corrupted, the device goes to ERRORRESET MODE
+			{
+				return ERRORRESET;
+			}
+			break;
+
+		}
+		case _4qB: //This is Triggered by the TIMER1_ISR, once completed successfully it disables the INT1 and it uses the Timer to check the DALI_IN State
+		{
+			if((GetDaliIntputPin()==DALI_LOGIC_1))
+			{
+
+				_4thQ = GetDaliIntputPin();
+				bitState = _1qB;
+				ToogleTestLed1();
+				return END; //Processing is done. It resets this state machine and moves the main state machine to the next state
+			}
+			else //If the bit is corrupted, the device goes to ERRORRESET MODE
+				{
+					return ERRORRESET;
+				}
+			break;
+		}
+
+	}
+
+	return STOP; //Still Processing the Bit
+}
 
 
 bit bitDemodulation()
@@ -438,7 +518,7 @@ bit bitDemodulation()
 				_1stQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
-				ToogleTestLed1();
+				//ToogleTestLed1();
 				break;
 			}
 
@@ -447,7 +527,7 @@ bit bitDemodulation()
 				_2ndQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _3qB;
-				ToogleTestLed2();
+				//ToogleTestLed2();
 				break;
 			}
 
@@ -457,7 +537,7 @@ bit bitDemodulation()
 				_3rdQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
-				ToogleTestLed3();
+				//ToogleTestLed3();
 				break;
 
 			}
@@ -467,7 +547,7 @@ bit bitDemodulation()
 				_4thQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
-				ToogleTestLed4();
+				//ToogleTestLed4();
 				return 1; //Processing is done. It resets this state machine and informs user the bit information is available
 				break;
 			}
@@ -484,80 +564,24 @@ int isbitHighorLow()
 	if ((_1stQ==DALI_LOGIC_0) && (_2ndQ==DALI_LOGIC_0) && (_3rdQ==DALI_LOGIC_1) && (_4thQ==DALI_LOGIC_1)) output = 1;
 	else if ((_1stQ==DALI_LOGIC_1) && (_2ndQ==DALI_LOGIC_1) && (_3rdQ==DALI_LOGIC_0) && (_4thQ==DALI_LOGIC_0)) output = 0;
 
-/*	_1stQ=0;
+	//It Resets the "Global" bits (File Scope only) that are used to store the data read from the GPIO
+	_1stQ=0;
 	_2ndQ=0;
 	_3rdQ=0;
-	_4thQ=0;*/
+	_4thQ=0;
 
 	return output;
 }
-/*
-int8_t ReadDaliByte()
-{
-	static xdata BITS_BYTE address;
-	static xdata uint8_t bitscounter=7;
-	int bitread=0;
 
-	if (bitDemodulation())	//Is Demodulation done for the bit?
-	{
-		bitread = isbitHighorLow();
-
-		if (bitread!=-1)
-		{
-			switch (bitscounter)
-			{
-				case 0: address.nybble.BB0 = bitread;
-						break;
-
-				case 1: address.nybble.BB1 = bitread;
-						break;
-
-				case 2: address.nybble.BB2 = bitread;
-						break;
-
-				case 3: address.nybble.BB3 = bitread;
-						break;
-
-				case 4: address.nybble.BB4 = bitread;
-						break;
-
-				case 5: address.nybble.BB5 = bitread;
-						break;
-
-				case 6: address.nybble.BB6 = bitread;
-						break;
-
-				case 7: address.nybble.BB7 = bitread;
-						break;
-			}
-			if(bitscounter--==0)
-			{
-				NOP();
-				bitscounter=7;
-				return address.Abyte;
-			}
-
-		}
-
-		else //If any of the bits is corrupted, the device goes to IDLE MODE
-		{
-			return -1;
-		}
-
-		return -2;		//returns -2 while collecting all the bits from the Dali Byte
-
-	}
-}*/
 
 void DaliRXDecoding()
 {
 	static xdata DALI_FRAME State = IDLE;
-	static xdata uint8_t Address;
-	static xdata uint8_t Dataa;
 
-	static xdata BITS_BYTE DaliData;
-	static xdata uint8_t bitscounter=7;
-	int bitread=0;
+
+	static xdata BITS_BYTE DaliData;		//Variable used to temporarily store the bits being read from the Dali Command
+	static xdata uint8_t bitscounter=7;		//Keeps the position of the current bit being read
+	int bitread=0;							//Used to store the current bit being read. if the value is -1, it means the data was invalid
 
 
 	switch (State)
@@ -568,7 +592,10 @@ void DaliRXDecoding()
 		   					{
 		   						if (GetBusQuietCounter()>1) State = START;
 		   						DaliData.Abyte=0;
-		   						//This Jumps straight to the next State on the State Machine so we don't loose a cycle
+		   						DaliFlags.DRegister=0;		//It resets all the Flags
+		   						DaliFlags.flag.Busy=1;		//It sets the Flag indicating the Dali Rx is busy
+
+		   						//This Jumps straight to the next State on the State Machine so we don't loose a cycle, it purposely doesn't have a break
 		   					}
 
 				case START:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
@@ -619,92 +646,55 @@ void DaliRXDecoding()
 											bitscounter=7;
 											if (State==ADDRESS)
 											{
-												Address= DaliData.Abyte;
+												DaliRXReg.Address= DaliData.Abyte;
 												State=DATA;
 											}
 											else
 											{
-												Dataa= DaliData.Abyte;
-												NOP();
+												DaliRXReg.Data= DaliData.Abyte;
+												State= STOP;
+												ReloadnStartDaliRxTimer(TMH,TML); //Reloads the Timer for the STOP bit condition
+
 											}
 
 										}
 
 									}
 
-									else //If any of the bits is corrupted, the device goes to IDLE MODE
+									else //If any of the bits is corrupted, the device goes to ERRORRESET MODE
 									{
-										State = IDLE;
-										#warning "Add_a_flag_indicating_error"
+										State = ERRORRESET;
 									}
 							}
 	   						break;
 	   					}
-#if 0
-	   			case DATA:
-	   				   					{
+				case STOP:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
+		   					{
+		   						State = stopconditionbitverify();
+		   						break;
+		   					}
+				case END:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
+		   					{
+		   						State = IDLE;
 
-	   				   						if (bitDemodulation())	//Is Demodulation done for the bit?
-	   											{
-	   												bitread = isbitHighorLow();
+		   						StopnDisableDaliRxTimer();
+		   						SetDaliInputPinPolarity(ACTIVE_LOW);
+		   						EnableInt1();
+		   						DaliFlags.flag.Dataready = 1;
+		   						break;
+		   					}
 
-	   												if (bitread!=-1)
-	   												{
-	   													switch (bitscounter)
-	   													{
-	   														case 0: DaliData.nybble.BB0 = bitread;
-	   																break;
+				case ERRORRESET:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
+		   					{
+		   						State = IDLE;
+		   						ToogleTestLed1();
+		   						StopnDisableDaliRxTimer();
+		   						SetDaliInputPinPolarity(ACTIVE_LOW);
+		   						EnableInt1();
+								DaliFlags.flag.Error = 1;
+		   						break;
+		   					}
 
-	   														case 1: DaliData.nybble.BB1 = bitread;
-	   																break;
-
-	   														case 2: DaliData.nybble.BB2 = bitread;
-	   																break;
-
-	   														case 3: DaliData.nybble.BB3 = bitread;
-	   																break;
-
-	   														case 4: DaliData.nybble.BB4 = bitread;
-	   																break;
-
-	   														case 5: DaliData.nybble.BB5 = bitread;
-	   																break;
-
-	   														case 6: DaliData.nybble.BB6 = bitread;
-	   																break;
-
-	   														case 7: DaliData.nybble.BB7 = bitread;
-	   																break;
-	   													}
-	   													if(bitscounter--==0)
-	   													{
-
-	   														bitscounter=7;
-	   														/*if (State==ADDRESS)
-	   														{
-	   															Address= DaliData.Abyte;
-	   															State=DATA;
-	   														}
-	   														else*/
-	   														{
-	   															Dataa= DaliData.Abyte;
-	   															NOP();
-	   														}
-
-	   													}
-
-	   												}
-
-	   												else //If any of the bits is corrupted, the device goes to IDLE MODE
-	   												{
-	   													State = IDLE;
-	   													NOP();
-	   													#warning "Add_a_flag_indicating_error"
-	   												}
-	   										}
-	   				   						break;
-	   				   					}
-				#endif
 	   			default: State=IDLE;
 
 
