@@ -577,7 +577,8 @@ void DaliRXDecoding()
 		   						break;
 		   					}
 
-	   			case ADDRESS:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
+	   			case ADDRESS:			//In this state, it gets the Data coming from the Dali Packet and load it to the Address Register and to the Data Register
+	   			case DATA:
 	   					{
 
 	   						if (bitDemodulation())	//Is Demodulation done for the bit?
@@ -616,16 +617,16 @@ void DaliRXDecoding()
 										{
 
 											bitscounter=7;
-											//if (State==ADDRESS)
+											if (State==ADDRESS)
 											{
 												Address= DaliData.Abyte;
 												State=DATA;
 											}
-											/*else
+											else
 											{
 												Dataa= DaliData.Abyte;
 												NOP();
-											}*/
+											}
 
 										}
 
@@ -639,7 +640,7 @@ void DaliRXDecoding()
 							}
 	   						break;
 	   					}
-
+#if 0
 	   			case DATA:
 	   				   					{
 
@@ -703,7 +704,7 @@ void DaliRXDecoding()
 	   										}
 	   				   						break;
 	   				   					}
-
+				#endif
 	   			default: State=IDLE;
 
 

@@ -48,6 +48,12 @@ typedef union daliflags
 								uint8_t DRegister;
 						} DALIFLAGS;
 
+typedef struct dalirxregisters
+				{
+					uint8_t Address;
+					uint8_t Data;
+				}DALIRXREGISTERS;
+
 typedef enum
 			{
 				IDLE=0,
