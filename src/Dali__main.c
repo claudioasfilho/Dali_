@@ -20,10 +20,11 @@ void main (void)
 	uint16_t fcounter;
    enter_DefaultMode_from_RESET();
 
+   DisableDisplay();
   // DISP_EN = DISP_BC_DRIVEN;           		// EFM8 does not drive display
 
    IE_EA = 1;                          		// Enable global interrupts
-   PRTDRV |=0x1;							//Enable high drive strength on P0
+   //PRTDRV |=0x1;							//Enable high drive strength on P0
 
    SetDaliInputPinPolarity(ACTIVE_LOW);
 
@@ -33,7 +34,7 @@ void main (void)
 	   if (PB0_SW==0) {
 
 		  DaliTXStateMachine(0xf0, 0x0f);
-		   for(fcounter=0; fcounter<0xfff; fcounter++);
+		   for(fcounter=0; fcounter<0xffff; fcounter++);
 	   }
 
    }

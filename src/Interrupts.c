@@ -44,7 +44,7 @@
 SI_INTERRUPT (INT1_ISR, INT1_IRQn)
 {
 
-	DaliRXDecoding();
+	DaliRXDecoding(1);
 
 }
 
@@ -62,7 +62,7 @@ SI_INTERRUPT (INT1_ISR, INT1_IRQn)
 SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
 {
 
-	DaliRXDecoding();
+	DaliRXDecoding(0);
 
 }
 

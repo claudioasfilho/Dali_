@@ -89,6 +89,8 @@ typedef enum
 //SI_SBIT (DISP_EN, SFR_P2, 3);          // Display Enable
 
 SI_SBIT (PB0_SW,SFR_P0, 2);			   //PB0 Switch Definition
+SI_SBIT (EFM_DISP_ENABLE,SFR_P2, 3);   //Board Display Control
+
 SI_SBIT (DALI_OUT, SFR_P0, 0);		   //Dali Output Pin
 SI_SBIT (DALI_IN, SFR_P0, 7);		   //Dali Input Pin
 
@@ -98,10 +100,12 @@ SI_SBIT (LED3,SFR_P1, 6);			   //Test LED
 SI_SBIT (LED4,SFR_P3, 1);			   //Test LED
 SI_SBIT (LED5,SFR_P0, 4);			   //Test LED
 
-#define ToogleTestLed1() LED1^=1;LED5^=1;
-#define ToogleTestLed2() LED2^=1;LED5^=1;
-#define ToogleTestLed3() LED3^=1;LED5^=1;
-#define ToogleTestLed4() LED4^=1;LED5^=1;
+#define DisableDisplay() EFM_DISP_ENABLE=0;
+#define ToogleTestLed1() LED1^=1;//LED5^=1;
+#define ToogleTestLed2() LED2^=1;//LED5^=1;
+#define ToogleTestLed3() LED3^=1;//LED5^=1;
+#define ToogleTestLed4() LED4^=1;//LED5^=1;
+#define ToogleTestLed5() LED5^=1;
 
 /* Manchester Encoder Methods */
 
@@ -136,7 +140,7 @@ bit GetDaliStopFlag();
 
 //Dali RX
 
-void DaliRXDecoding();
+void DaliRXDecoding(int EntryMethod);
 
 void ReloadDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
 void StartDaliRxTimer();

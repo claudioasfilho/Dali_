@@ -338,7 +338,7 @@ bit _2ndQ;
 bit _3rdQ;
 bit _4thQ;
 
-static xdata DALI_FRAME ERRORLOG = IDLE;
+static xdata DALI_FRAME ErrorLog = IDLE;
 
 
 
@@ -350,23 +350,29 @@ DALI_FRAME startconditionbitDemodulation()
 	{
 		case _1qB: //This is Triggered by the INT1_ISR
 		{
+			_1stQ = GetDaliIntputPin();
 			if((GetDaliIntputPin()==DALI_LOGIC_0))
 			{
 
-				//_1stQ = GetDaliIntputPin();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
 				//ToogleTestLed();
+			}
+			else
+			{
+				//Something is wrong with the Data, it Returns an Error
+				bitState = _1qB;
+				return ERRORRESET;
 			}
 			break;
 		}
 
 		case _2qB: //This is Triggered by the TIMER1_ISR
 		{
+			_2ndQ = GetDaliIntputPin();
 			if((GetDaliIntputPin()==DALI_LOGIC_0))
 			{
 
-				//_2ndQ = GetDaliIntputPin();
 				StopnDisableDaliRxTimer();
 				SetDaliInputPinPolarity(ACTIVE_HIGH);
 				EnableInt1();
@@ -375,32 +381,41 @@ DALI_FRAME startconditionbitDemodulation()
 			}
 			else
 			{
-				StopnDisableDaliRxTimer();
-			bitState = _1qB;
+				//Something is wrong with the Data, it Returns an Error
+				bitState = _1qB;
+				return ERRORRESET;
 			}
 			break;
 		}
 
 		case _3qB: //This is Triggered by the TIMER1_ISR
 		{
+			_3rdQ = GetDaliIntputPin();
 			if((GetDaliIntputPin()==DALI_LOGIC_1))
 			{
 
-				//_3rdQ = GetDaliIntputPin();
+
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
 				//ToogleTestLed();
 
+			}
+			else
+			{
+				//Something is wrong with the Data, it Returns an Error
+				bitState = _1qB;
+				return ERRORRESET;
 			}
 			break;
 
 		}
 		case _4qB: //This is Triggered by the TIMER1_ISR, once completed successfully it disables the INT1 and it uses the Timer to check the DALI_IN State
 		{
+			_4thQ = GetDaliIntputPin();
 			if((GetDaliIntputPin()==DALI_LOGIC_1))
 			{
 
-				//_4thQ = GetDaliIntputPin();
+
 				DisableInt1();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
@@ -410,12 +425,8 @@ DALI_FRAME startconditionbitDemodulation()
 			else
 			{
 				//Something is wrong with the Data, it resets the INT trigger and Disables Timer
-				StopnDisableDaliRxTimer();
-				SetDaliInputPinPolarity(ACTIVE_LOW);
-				EnableInt1();
-				StopnDisableDaliRxTimer();
 				bitState = _1qB;
-				return IDLE;
+				return ERRORRESET;
 			}
 			break;
 		}
@@ -443,6 +454,7 @@ DALI_FRAME stopconditionbitverify()
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 			{
+				bitState = _1qB;
 				return ERRORRESET;
 			}
 			break;
@@ -460,6 +472,7 @@ DALI_FRAME stopconditionbitverify()
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 			{
+				bitState = _1qB;
 				return ERRORRESET;
 			}
 			break;
@@ -478,6 +491,7 @@ DALI_FRAME stopconditionbitverify()
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 			{
+				bitState = _1qB;
 				return ERRORRESET;
 			}
 			break;
@@ -495,6 +509,7 @@ DALI_FRAME stopconditionbitverify()
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 				{
+					bitState = _1qB;
 					return ERRORRESET;
 				}
 			break;
@@ -574,15 +589,16 @@ int isbitHighorLow()
 }
 
 
-void DaliRXDecoding()
+void DaliRXDecoding(int EntryMethod)
 {
 	static xdata DALI_FRAME State = IDLE;
-
+	int Entry;
 
 	static xdata BITS_BYTE DaliData;		//Variable used to temporarily store the bits being read from the Dali Command
 	static xdata uint8_t bitscounter=7;		//Keeps the position of the current bit being read
 	int bitread=0;							//Used to store the current bit being read. if the value is -1, it means the data was invalid
 
+	Entry=EntryMethod;
 
 	switch (State)
 
@@ -601,6 +617,7 @@ void DaliRXDecoding()
 				case START:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
 		   					{
 		   						State = startconditionbitDemodulation();
+		   						if (State==ERRORRESET) ErrorLog = START;
 		   						break;
 		   					}
 
@@ -644,12 +661,12 @@ void DaliRXDecoding()
 										{
 
 											bitscounter=7;
-											if (State==ADDRESS)
+											if (State==ADDRESS)	//Reading Address
 											{
 												DaliRXReg.Address= DaliData.Abyte;
 												State=DATA;
 											}
-											else
+											else				//Reading Data
 											{
 												DaliRXReg.Data= DaliData.Abyte;
 												State= STOP;
@@ -663,7 +680,9 @@ void DaliRXDecoding()
 
 									else //If any of the bits is corrupted, the device goes to ERRORRESET MODE
 									{
+										ErrorLog = State;
 										State = ERRORRESET;
+
 									}
 							}
 	   						break;
@@ -671,12 +690,15 @@ void DaliRXDecoding()
 				case STOP:			//In this state, it checks if the RX bus was quite and also if it receives the start bit
 		   					{
 		   						State = stopconditionbitverify();
-		   						break;
+		   						if (State==ERRORRESET) ErrorLog = STOP;
+
+		   						if (State==STOP)	break;
 		   					}
 				case END:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
 		   					{
 		   						State = IDLE;
-
+		   						ToogleTestLed2();
+		   						ErrorLog = IDLE;
 		   						StopnDisableDaliRxTimer();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
@@ -687,7 +709,7 @@ void DaliRXDecoding()
 				case ERRORRESET:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
 		   					{
 		   						State = IDLE;
-		   						ToogleTestLed1();
+		   						ToogleTestLed5();
 		   						StopnDisableDaliRxTimer();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
