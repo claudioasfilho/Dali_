@@ -142,6 +142,15 @@ bit GetDaliStopFlag();
 
 void DaliRXDecoding(int EntryMethod);
 
+DALI_FRAME startconditionbitDemodulation();
+DALI_FRAME stopconditionbitverify();
+bit bitDemodulation();
+int isbitHighorLow();
+
+
+
+
+
 void ReloadDaliRxTimer(uint8_t reloadH, uint8_t reloadL);
 void StartDaliRxTimer();
 void StopDaliRxTimer();

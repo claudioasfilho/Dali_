@@ -26,7 +26,7 @@ void main (void)
    IE_EA = 1;                          		// Enable global interrupts
    //PRTDRV |=0x1;							//Enable high drive strength on P0
 
-   SetDaliInputPinPolarity(ACTIVE_LOW);
+//   SetDaliInputPinPolarity(ACTIVE_LOW);
 
 
    while (1) {

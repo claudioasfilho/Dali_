@@ -254,8 +254,8 @@ extern void INTERRUPT_0_enter_DefaultMode_from_RESET(void) {
 		 | IE_ET0__ENABLED | IE_ET1__DISABLED | IE_ET2__DISABLED | IE_ES0__DISABLED;
 
 	//Highest Interrupt Priority for the INT1
-	IP |= 0x4;
-	IPH |= 0x4;
+//	IP |= 0x4;
+//	IPH|= 0x4;
 
 
 	// [IE - Interrupt Enable]$
