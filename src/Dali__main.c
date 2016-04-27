@@ -23,6 +23,9 @@ void main (void)
    DisableDisplay();
   // DISP_EN = DISP_BC_DRIVEN;           		// EFM8 does not drive display
 
+   TCON &= 0xF7; //Add this line
+   IE_EA = 1; // Enable global interrupts
+
    IE_EA = 1;                          		// Enable global interrupts
    //PRTDRV |=0x1;							//Enable high drive strength on P0
 

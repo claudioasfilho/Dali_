@@ -1,15 +1,15 @@
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 1   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE DALI
 OBJECT MODULE PLACED IN .\src\Dali.OBJ
-COMPILER INVOKED BY: c:\SiliconLabs\SimplicityStudio\v3_3\developer\toolchains\keil_8051\9.53\BIN\C51.exe C:\Users\clfil
-                    -ho\Dropbox (Silicon Labs)\Code_Workspace_Dali\Dali_\src\Dali.c OMF2 SMALL DEBUG OBJECTEXTEND ROM(LARGE) WARNINGLEVEL(2) 
-                    -FLOATFUZZY(3) OPTIMIZE(8,SPEED) DEFINE(DEBUG=1) INTVECTOR(0X0000) INTPROMOTE INCDIR(C:/SiliconLabs/SimplicityStudio/v3_3
-                    -/developer/sdks/si8051/v3//Device/shared/si8051Base;C:/SiliconLabs/SimplicityStudio/v3_3/developer/sdks/si8051/v3//Devic
-                    -e/EFM8UB1;C:/SiliconLabs/SimplicityStudio/v3_3/developer/sdks/si8051/v3//Device/EFM8UB1/inc;C:\SiliconLabs\SimplicityStu
-                    -dio\v3_4a\developer\sdks\si8051\v3\Device\EFM8UB1\inc) PRINT(.\src\Dali.lst) COND PAGEWIDTH(120) PAGELENGTH(65) OBJECT(.
-                    -\src\Dali.OBJ)
+COMPILER INVOKED BY: c:\SiliconLabs\SimplicityStudio\v3\developer\toolchains\keil_8051\9.53\BIN\C51.exe C:\Users\clfilho
+                    -\Dropbox (Silicon Labs)\Code_Workspace_Dali\Dali_\src\Dali.c OMF2 SMALL DEBUG OBJECTEXTEND ROM(LARGE) WARNINGLEVEL(2) FL
+                    -OATFUZZY(3) OPTIMIZE(8,SPEED) DEFINE(DEBUG=1) INTVECTOR(0X0000) INTPROMOTE INCDIR(C:/SiliconLabs/SimplicityStudio/v3/dev
+                    -eloper/sdks/si8051/v3//Device/shared/si8051Base;C:/SiliconLabs/SimplicityStudio/v3/developer/sdks/si8051/v3//Device/EFM8
+                    -UB1;C:/SiliconLabs/SimplicityStudio/v3/developer/sdks/si8051/v3//Device/EFM8UB1/inc;C:\SiliconLabs\SimplicityStudio\v3_4
+                    -a\developer\sdks\si8051\v3\Device\EFM8UB1\inc) PRINT(.\src\Dali.lst) COND PAGEWIDTH(120) PAGELENGTH(65) OBJECT(.\src\Dal
+                    -i.OBJ)
 
 line level    source
 
@@ -63,7 +63,7 @@ line level    source
   48          
   49          
   50          //bit MDone;
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 2   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 2   
 
   51          //bit MOutput;
   52          //bit DaliStopFlag;
@@ -128,7 +128,7 @@ line level    source
  110   2                      Input.Abyte = input;
  111   2              }
  112   1      
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 3   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 3   
 
  113   1              while (counter>=0)
  114   1              {
@@ -193,7 +193,7 @@ line level    source
  173   2                      if (GetDaliStopFlag()==0)               //Are these the Stop Bits?
  174   2                      {
  175   3      
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 4   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 4   
 
  176   3                              //The next lines implement the two steps of the Manchester Decoding
  177   3                              if (counter==0)                                 //Process First Part of the Byte
@@ -258,7 +258,7 @@ line level    source
  236          
  237          
  238          void DaliFrameStart()
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 5   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 5   
 
  239          {
  240   1              ClearBusyFlag();                                //Clear Flag that indicates the Manchester Decoder is Busy on the Interrupt
@@ -323,7 +323,7 @@ line level    source
  299   1              DaliFlags.flag.Stop =1;
  300   1      }
  301          
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 6   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 6   
 
  302          void ClearDaliStopFlag()
  303          {
@@ -388,7 +388,7 @@ line level    source
  362   3                              {
  363   4      
  364   4                                      ReloadnStartDaliRxTimer(STMH, STML);
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 7   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 7   
 
  365   4                                      bitState = _2qB;
  366   4                                      //ToogleTestLed();
@@ -453,7 +453,7 @@ line level    source
  424   4      
  425   4                                      DebugCounter++;
  426   4      
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 8   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 8   
 
  427   4                                      DisableInt1();
  428   4                                      ReloadnStartDaliRxTimer(STMH, STML);
@@ -518,7 +518,7 @@ line level    source
  486   4                              }
  487   3                              break;
  488   3                      }
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 9   
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 9   
 
  489   2      
  490   2                      case _3qB: //This is Triggered by the TIMER1_ISR
@@ -583,7 +583,7 @@ line level    source
  547   3                              }
  548   2      
  549   2                              case _2qB: //This is Triggered by the TIMER1_ISR
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 10  
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 10  
 
  550   2                              {
  551   3                                      _2ndQ = GetDaliIntputPin();
@@ -648,7 +648,7 @@ line level    source
  606          
  607          void EnableDaliRxTimerInt()
  608          {
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 11  
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 11  
 
  609   1              IE |= IE_ET1__ENABLED;
  610   1      }
@@ -713,7 +713,7 @@ line level    source
  669   1              if (GetDaliIntputPin()==0)
  670   1              {
  671   2      
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 12  
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 12  
 
  672   2                      ClearBusQuietCounter();
  673   2              }
@@ -761,165 +761,167 @@ line level    source
  715          
  716          void EnableInt1 ()
  717          {
- 718   1              IE |= 0x4;
- 719   1      }
- 720          
- 721          void DisableInt1 ()
- 722          {
- 723   1              IE &= 0xfb;
- 724   1      }
- 725          
+ 718   1              TCON &= 0xF7; //Clearing the interrupt
+ 719   1              IE |= 0x4;
+ 720   1      }
+ 721          
+ 722          void DisableInt1 ()
+ 723          {
+ 724   1              IE &= 0xfb;
+ 725   1      }
  726          
- 727          void DaliRXDecoding(int EntryMethod)
- 728          {
- 729   1              static xdata DALI_FRAME State = IDLE;
- 730   1              int Entry;
- 731   1      
- 732   1              static xdata BITS_BYTE DaliData;                //Variable used to temporarily store the bits being read from the Dali 
+ 727          
+ 728          void DaliRXDecoding(int EntryMethod)
+ 729          {
+ 730   1              static xdata DALI_FRAME State = IDLE;
+ 731   1              int Entry;
+ 732   1      
+ 733   1              static xdata BITS_BYTE DaliData;                //Variable used to temporarily store the bits being read from the Dali 
              -Command
- 733   1              static xdata uint8_t bitscounter=7;             //Keeps the position of the current bit being read
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 13  
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 13  
 
- 734   1              int bitread=0;                                                  //Used to store the current bit being read. if the value is -1, it means the data wa
+ 734   1              static xdata uint8_t bitscounter=7;             //Keeps the position of the current bit being read
+ 735   1              int bitread=0;                                                  //Used to store the current bit being read. if the value is -1, it means the data wa
              -s invalid
- 735   1      
- 736   1              Entry=EntryMethod;
- 737   1      
- 738   1              switch (State)
- 739   1      
- 740   1                              {
- 741   2      
- 742   2                                      case IDLE:                      //In this state, it checks if the RX bus was quite and also if it receives the start bit
- 743   2                                                              {
- 744   3                                                                      if (GetBusQuietCounter()>1) State = START;
- 745   3                                                                      DaliData.Abyte=0;
- 746   3                                                                      DaliFlags.DRegister=0;          //It resets all the Flags
- 747   3                                                                      DaliFlags.flag.Busy=1;          //It sets the Flag indicating the Dali Rx is busy
- 748   3      
- 749   3                                                                      //This Jumps straight to the next State on the State Machine so we don't loose a cycle, it purp
+ 736   1      
+ 737   1              Entry=EntryMethod;
+ 738   1      
+ 739   1              switch (State)
+ 740   1      
+ 741   1                              {
+ 742   2      
+ 743   2                                      case IDLE:                      //In this state, it checks if the RX bus was quite and also if it receives the start bit
+ 744   2                                                              {
+ 745   3                                                                      if (GetBusQuietCounter()>1) State = START;
+ 746   3                                                                      DaliData.Abyte=0;
+ 747   3                                                                      DaliFlags.DRegister=0;          //It resets all the Flags
+ 748   3                                                                      DaliFlags.flag.Busy=1;          //It sets the Flag indicating the Dali Rx is busy
+ 749   3      
+ 750   3                                                                      //This Jumps straight to the next State on the State Machine so we don't loose a cycle, it purp
              -osely doesn't have a break
- 750   3                                                              }
- 751   2      
- 752   2                                      case START:                     //In this state, it checks if the RX bus was quite and also if it receives the start bit
- 753   2                                                              {
- 754   3                                                                      State = startconditionbitDemodulation();
- 755   3                                                                      if (State==ERRORRESET) ErrorLog = START;
- 756   3                                                                      break;
- 757   3                                                              }
- 758   2      
- 759   2                                      case ADDRESS:                   //In this state, it gets the Data coming from the Dali Packet and load it to the Ad
+ 751   3                                                              }
+ 752   2      
+ 753   2                                      case START:                     //In this state, it checks if the RX bus was quite and also if it receives the start bit
+ 754   2                                                              {
+ 755   3                                                                      State = startconditionbitDemodulation();
+ 756   3                                                                      if (State==ERRORRESET) ErrorLog = START;
+ 757   3                                                                      break;
+ 758   3                                                              }
+ 759   2      
+ 760   2                                      case ADDRESS:                   //In this state, it gets the Data coming from the Dali Packet and load it to the Ad
              -dress Register and to the Data Register
- 760   2                                      case DATA:
- 761   2                                                      {
- 762   3      
- 763   3                                                              if (bitDemodulation())  //Is Demodulation done for the bit?
- 764   3                                                                      {
- 765   4                                                                              bitread = isbitHighorLow();
- 766   4      
- 767   4                                                                              if (bitread!=-1)
- 768   4                                                                              {
- 769   5                                                                                      switch (bitscounter)
- 770   5                                                                                      {
- 771   6                                                                                              case 0: DaliData.nybble.BB0 = bitread;
- 772   6                                                                                                              break;
- 773   6      
- 774   6                                                                                              case 1: DaliData.nybble.BB1 = bitread;
- 775   6                                                                                                              break;
- 776   6      
- 777   6                                                                                              case 2: DaliData.nybble.BB2 = bitread;
- 778   6                                                                                                              break;
- 779   6      
- 780   6                                                                                              case 3: DaliData.nybble.BB3 = bitread;
- 781   6                                                                                                              break;
- 782   6      
- 783   6                                                                                              case 4: DaliData.nybble.BB4 = bitread;
- 784   6                                                                                                              break;
- 785   6      
- 786   6                                                                                              case 5: DaliData.nybble.BB5 = bitread;
- 787   6                                                                                                              break;
- 788   6      
- 789   6                                                                                              case 6: DaliData.nybble.BB6 = bitread;
- 790   6                                                                                                              break;
- 791   6      
- 792   6                                                                                              case 7: DaliData.nybble.BB7 = bitread;
- 793   6                                                                                                              break;
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 14  
+ 761   2                                      case DATA:
+ 762   2                                                      {
+ 763   3      
+ 764   3                                                              if (bitDemodulation())  //Is Demodulation done for the bit?
+ 765   3                                                                      {
+ 766   4                                                                              bitread = isbitHighorLow();
+ 767   4      
+ 768   4                                                                              if (bitread!=-1)
+ 769   4                                                                              {
+ 770   5                                                                                      switch (bitscounter)
+ 771   5                                                                                      {
+ 772   6                                                                                              case 0: DaliData.nybble.BB0 = bitread;
+ 773   6                                                                                                              break;
+ 774   6      
+ 775   6                                                                                              case 1: DaliData.nybble.BB1 = bitread;
+ 776   6                                                                                                              break;
+ 777   6      
+ 778   6                                                                                              case 2: DaliData.nybble.BB2 = bitread;
+ 779   6                                                                                                              break;
+ 780   6      
+ 781   6                                                                                              case 3: DaliData.nybble.BB3 = bitread;
+ 782   6                                                                                                              break;
+ 783   6      
+ 784   6                                                                                              case 4: DaliData.nybble.BB4 = bitread;
+ 785   6                                                                                                              break;
+ 786   6      
+ 787   6                                                                                              case 5: DaliData.nybble.BB5 = bitread;
+ 788   6                                                                                                              break;
+ 789   6      
+ 790   6                                                                                              case 6: DaliData.nybble.BB6 = bitread;
+ 791   6                                                                                                              break;
+ 792   6      
+ 793   6                                                                                              case 7: DaliData.nybble.BB7 = bitread;
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 14  
 
- 794   6                                                                                      }
- 795   5                                                                                      if(bitscounter--==0)
- 796   5                                                                                      {
- 797   6      
- 798   6                                                                                              bitscounter=7;
- 799   6                                                                                              if (State==ADDRESS)     //Reading Address
- 800   6                                                                                              {
- 801   7                                                                                                      DaliRXReg.Address= DaliData.Abyte;
- 802   7                                                                                                      State=DATA;
- 803   7                                                                                              }
- 804   6                                                                                              else                            //Reading Data
- 805   6                                                                                              {
- 806   7                                                                                                      DaliRXReg.Data= DaliData.Abyte;
- 807   7                                                                                                      State= STOP;
- 808   7                                                                                                      ReloadnStartDaliRxTimer(TMH,TML); //Reloads the Timer for the STOP bit condition
- 809   7      
- 810   7                                                                                              }
- 811   6      
- 812   6                                                                                      }
- 813   5      
- 814   5                                                                              }
- 815   4      
- 816   4                                                                              else //If any of the bits is corrupted, the device goes to ERRORRESET MODE
- 817   4                                                                              {
- 818   5                                                                                      ErrorLog = State;
- 819   5                                                                                      State = ERRORRESET;
- 820   5      
- 821   5                                                                              }
- 822   4                                                              }
- 823   3                                                              break;
- 824   3                                                      }
- 825   2                                      case STOP:                      //In this state, it checks if the RX bus was quite and also if it receives the start bit
- 826   2                                                              {
- 827   3                                                                      State = stopconditionbitverify();
- 828   3                                                                      if (State==ERRORRESET) ErrorLog = STOP;
- 829   3      
- 830   3                                                                      if (State==STOP)        break;
- 831   3                                                              }
- 832   2                                      case END:                       //In this state, it Resets the state machine and Turn on the Data Ready Flag
- 833   2                                                              {
- 834   3                                                                      State = IDLE;
- 835   3                                                                      ToogleTestLed2();
- 836   3                                                                      ErrorLog = IDLE;
- 837   3                                                                      StopnDisableDaliRxTimer();
- 838   3                                                                      SetDaliInputPinPolarity(ACTIVE_LOW);
- 839   3                                                                      EnableInt1();
- 840   3                                                                      TCON=0;
- 841   3                                                                      DaliFlags.flag.Dataready = 1;
- 842   3                                                                      break;
- 843   3                                                              }
- 844   2      
- 845   2                                      case ERRORRESET:                        //In this state, it Resets the state machine and Turn on the Data Ready Flag
- 846   2                                                              {
- 847   3                                                                      State = IDLE;
- 848   3                                                                      ToogleTestLed5();
- 849   3                                                                      StopnDisableDaliRxTimer();
- 850   3                                                                      SetDaliInputPinPolarity(ACTIVE_LOW);
- 851   3                                                                      EnableInt1();
- 852   3                                                                      TCON=0;
- 853   3                                                                      DaliFlags.flag.Error = 1;
- 854   3                                                                      break;
- 855   3                                                              }
- 856   2      
-C51 COMPILER V9.53.0.0   DALI                                                              04/21/2016 14:36:28 PAGE 15  
+ 794   6                                                                                                              break;
+ 795   6                                                                                      }
+ 796   5                                                                                      if(bitscounter--==0)
+ 797   5                                                                                      {
+ 798   6      
+ 799   6                                                                                              bitscounter=7;
+ 800   6                                                                                              if (State==ADDRESS)     //Reading Address
+ 801   6                                                                                              {
+ 802   7                                                                                                      DaliRXReg.Address= DaliData.Abyte;
+ 803   7                                                                                                      State=DATA;
+ 804   7                                                                                              }
+ 805   6                                                                                              else                            //Reading Data
+ 806   6                                                                                              {
+ 807   7                                                                                                      DaliRXReg.Data= DaliData.Abyte;
+ 808   7                                                                                                      State= STOP;
+ 809   7                                                                                                      ReloadnStartDaliRxTimer(TMH,TML); //Reloads the Timer for the STOP bit condition
+ 810   7      
+ 811   7                                                                                              }
+ 812   6      
+ 813   6                                                                                      }
+ 814   5      
+ 815   5                                                                              }
+ 816   4      
+ 817   4                                                                              else //If any of the bits is corrupted, the device goes to ERRORRESET MODE
+ 818   4                                                                              {
+ 819   5                                                                                      ErrorLog = State;
+ 820   5                                                                                      State = ERRORRESET;
+ 821   5      
+ 822   5                                                                              }
+ 823   4                                                              }
+ 824   3                                                              break;
+ 825   3                                                      }
+ 826   2                                      case STOP:                      //In this state, it checks if the RX bus was quite and also if it receives the start bit
+ 827   2                                                              {
+ 828   3                                                                      State = stopconditionbitverify();
+ 829   3                                                                      if (State==ERRORRESET) ErrorLog = STOP;
+ 830   3      
+ 831   3                                                                      if (State==STOP)        break;
+ 832   3                                                              }
+ 833   2                                      case END:                       //In this state, it Resets the state machine and Turn on the Data Ready Flag
+ 834   2                                                              {
+ 835   3                                                                      State = IDLE;
+ 836   3                                                                      ToogleTestLed2();
+ 837   3                                                                      ErrorLog = IDLE;
+ 838   3                                                                      StopnDisableDaliRxTimer();
+ 839   3                                                                      //INTERRUPT_0_enter_DefaultMode_from_RESET();
+ 840   3                                                                      SetDaliInputPinPolarity(ACTIVE_LOW);
+ 841   3                                                                      EnableInt1();
+ 842   3                                                              //      TCON=0;
+ 843   3                                                                      DaliFlags.flag.Dataready = 1;
+ 844   3                                                                      break;
+ 845   3                                                              }
+ 846   2      
+ 847   2                                      case ERRORRESET:                        //In this state, it Resets the state machine and Turn on the Data Ready Flag
+ 848   2                                                              {
+ 849   3                                                                      State = IDLE;
+ 850   3                                                                      //ToogleTestLed5();
+ 851   3                                                                      StopnDisableDaliRxTimer();
+ 852   3                                                                      SetDaliInputPinPolarity(ACTIVE_LOW);
+ 853   3                                                                      EnableInt1();
+ 854   3                                                              //      TCON=0;
+ 855   3                                                                      DaliFlags.flag.Error = 1;
+ 856   3                                                                      break;
+C51 COMPILER V9.53.0.0   DALI                                                              04/27/2016 10:54:34 PAGE 15  
 
- 857   2                                      default: State=IDLE;
+ 857   3                                                              }
  858   2      
- 859   2      
+ 859   2                                      default: State=IDLE;
  860   2      
- 861   2                              }
- 862   1      }
+ 861   2      
+ 862   2      
+ 863   2                              }
+ 864   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1478    ----
+   CODE SIZE        =   1472    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =     11    ----
    PDATA SIZE       =   ----    ----

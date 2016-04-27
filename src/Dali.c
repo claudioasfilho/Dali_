@@ -715,6 +715,7 @@ void SetDaliInputPinPolarity (INTPOLARITY input)
 
 void EnableInt1 ()
 {
+	TCON &= 0xF7; //Clearing the interrupt
 	IE |= 0x4;
 }
 
@@ -835,9 +836,10 @@ void DaliRXDecoding(int EntryMethod)
 		   						ToogleTestLed2();
 		   						ErrorLog = IDLE;
 		   						StopnDisableDaliRxTimer();
+		   						//INTERRUPT_0_enter_DefaultMode_from_RESET();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
-		   						TCON=0;
+		   					//	TCON=0;
 		   						DaliFlags.flag.Dataready = 1;
 		   						break;
 		   					}
@@ -845,11 +847,11 @@ void DaliRXDecoding(int EntryMethod)
 				case ERRORRESET:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
 		   					{
 		   						State = IDLE;
-		   						ToogleTestLed5();
+		   						//ToogleTestLed5();
 		   						StopnDisableDaliRxTimer();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
-		   						TCON=0;
+		   					//	TCON=0;
 								DaliFlags.flag.Error = 1;
 		   						break;
 		   					}
