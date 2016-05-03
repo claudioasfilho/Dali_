@@ -84,7 +84,7 @@ typedef enum
 #define DALI_LOGIC_0 0
 
 //-----------------------------------------------------------------------------
-// Pin Definitions
+// Hardware Related Definitions
 //-----------------------------------------------------------------------------
 //SI_SBIT (DISP_EN, SFR_P2, 3);          // Display Enable
 
@@ -107,6 +107,9 @@ SI_SBIT (LED5,SFR_P0, 4);			   //Test LED
 #define ToogleTestLed4() LED4^=1;//LED5^=1;
 #define ToogleTestLed5() LED5^=1;
 
+
+
+
 /* Manchester Encoder Methods */
 
 void ManchesterEncoder (uint8_t input);
@@ -126,7 +129,8 @@ void StopDaliTxTimer();
 
 void DaliFrameStart();
 void DaliFrameStop();
-void DaliTXStateMachine(uint8_t address, uint8_t Ddata);
+void DaliTXFrame(uint8_t address, uint8_t Ddata);
+void DaliAnswerFrame(uint8_t Ddata);
 
 void SetDaliOutputPin();
 void ClearDaliOutputPin();

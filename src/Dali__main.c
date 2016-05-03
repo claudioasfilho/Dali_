@@ -36,8 +36,15 @@ void main (void)
 
 	   if (PB0_SW==0) {
 
-		  DaliTXStateMachine(0xf0, 0x0f);
+		  DaliTXFrame(0xf0, 0x0f);
 		   for(fcounter=0; fcounter<0xffff; fcounter++);
+	   }
+
+	   if (GetBusyFlag()==1)
+	   {
+		   ClearBusyFlag();
+		   DaliAnswerFrame(0xff);
+
 	   }
 
    }

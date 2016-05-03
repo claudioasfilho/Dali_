@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/21/2016 13:50:15 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/03/2016 11:55:39 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERRUPTS
@@ -63,7 +63,7 @@ line level    source
   48   1      
   49   1      }
   50          
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        04/21/2016 13:50:15 PAGE 2   
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/03/2016 11:55:39 PAGE 2   
 
   51          
   52          //-----------------------------------------------------------------------------
@@ -79,35 +79,36 @@ line level    source
   62          SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
   63          {
   64   1      
-  65   1              DaliRXDecoding(0);
-  66   1      
-  67   1      }
-  68          
+  65   1              ToogleTestLed4();
+  66   1              DaliRXDecoding(0);
+  67   1      
+  68   1      }
   69          
-  70          //-----------------------------------------------------------------------------
-  71          // Dali TX Timer ISR (TIMER0)
-  72          //-----------------------------------------------------------------------------
-  73          //
-  74          // TIMER0 ISR Content goes here. Remember to clear flag bits:
-  75          // TCON::TF0 (Timer 0 Overflow Flag)
-  76          //
-  77          // Here we process the Timer0 interrupt and toggle the LED when appropriate
-  78          //
-  79          //-----------------------------------------------------------------------------
-  80          SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
-  81          {
-  82   1      
-  83   1              ReloadDaliTxTimer(TMH, TML);
-  84   1              DaliTxHandler();
-  85   1              IsDaliBusQuiet();
-  86   1      
-  87   1      }
-  88          
+  70          
+  71          //-----------------------------------------------------------------------------
+  72          // Dali TX Timer ISR (TIMER0)
+  73          //-----------------------------------------------------------------------------
+  74          //
+  75          // TIMER0 ISR Content goes here. Remember to clear flag bits:
+  76          // TCON::TF0 (Timer 0 Overflow Flag)
+  77          //
+  78          // Here we process the Timer0 interrupt and toggle the LED when appropriate
+  79          //
+  80          //-----------------------------------------------------------------------------
+  81          SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
+  82          {
+  83   1      
+  84   1              ReloadDaliTxTimer(TMH, TML);
+  85   1              DaliTxHandler();
+  86   1              IsDaliBusQuiet();
+  87   1      
+  88   1      }
   89          
+  90          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    203    ----
+   CODE SIZE        =    208    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

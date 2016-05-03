@@ -253,7 +253,7 @@ void DaliFrameStop()
 
 }
 
-void DaliTXStateMachine(uint8_t address, uint8_t Ddata)
+void DaliTXFrame(uint8_t address, uint8_t Ddata)
 {
 	DALI_FRAME States;
 
@@ -292,6 +292,43 @@ void DaliTXStateMachine(uint8_t address, uint8_t Ddata)
 	}
 
 }
+
+void DaliAnswerFrame(uint8_t Ddata)
+{
+	DALI_FRAME States;
+
+	SetDaliOutputPin();			//The Line is Normally High
+	States = START;
+
+	while (States<END)
+	{
+		switch (States)
+		{
+			case START: {
+							DaliFrameStart();
+							States= DATA;
+							break;
+						}
+
+			case DATA: {
+							ManchesterEncoder(Ddata);
+							States= STOP;
+							break;
+						}
+
+			case STOP: {
+							DaliFrameStop();
+							States= END;
+							break;
+						}
+
+		}
+	}
+
+}
+/*Dali Stop bit Flag Getters and Setters*/
+
+
 /*Dali Stop bit Flag Getters and Setters*/
 
 void SetDaliStopFlag()

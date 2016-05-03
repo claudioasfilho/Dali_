@@ -62,6 +62,7 @@ SI_INTERRUPT (INT1_ISR, INT1_IRQn)
 SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
 {
 
+	ToogleTestLed4();
 	DaliRXDecoding(0);
 
 }
