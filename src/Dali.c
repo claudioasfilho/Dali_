@@ -765,6 +765,16 @@ void DisableInt1 ()
 	IE &= 0xfb;
 }
 
+DALIRXREGISTERS GetDaliRXData()
+{
+	return DaliRXReg;
+}
+
+void ClearDaliRXData()
+{
+	DaliRXReg.Address=0;
+	DaliRXReg.Data=0;
+}
 
 void DaliRXDecoding(int EntryMethod, DALIMODE mode)
 {

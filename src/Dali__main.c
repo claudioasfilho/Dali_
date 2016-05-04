@@ -13,6 +13,7 @@
 //-----------------------------------------------------------------------------
 // Main Routine
 //-----------------------------------------------------------------------------
+   xdata DALIRXREGISTERS DaliRead;
 void main (void)
 {
 	uint8_t test=0;
@@ -29,10 +30,13 @@ void main (void)
    IE_EA = 1;                          		// Enable global interrupts
    //PRTDRV |=0x1;							//Enable high drive strength on P0
 
-//   SetDaliInputPinPolarity(ACTIVE_LOW);
+  // SetDaliInputPinPolarity(ACTIVE_LOW);
 
 
-   //ClearDaliFlags();
+
+   ClearDaliFlags();
+   ClearDaliRXData();
+
    while (1) {
 
 #ifdef DALIMASTERMODE
@@ -44,17 +48,27 @@ void main (void)
 		   for(fcounter=0; fcounter<0xffff; fcounter++);
 	   }
 
+	   if (GetDaliDataReadyFlag()==1)
+	   {
 
-#endif
+		   ClearDaliDataReadyFlag();
+		   DaliRead=GetDaliRXData();
+		   NOP();
+
+	   }
+
+#else
 
 
 	   if (GetDaliDataReadyFlag()==1)
 	   {
+		   DaliRead=GetDaliRXData();
 		   ClearDaliDataReadyFlag();
 		   DaliAnswerFrame(0xff);
 
 	   }
 
+#endif
    }
 
 

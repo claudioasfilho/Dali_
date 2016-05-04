@@ -156,6 +156,8 @@ bit GetDaliStopFlag();
 
 //Dali RX
 
+DALIRXREGISTERS GetDaliRXData();
+void ClearDaliRXData();
 void DaliRXDecoding(int EntryMethod, DALIMODE mode);
 
 DALI_FRAME startconditionbitDemodulation();
