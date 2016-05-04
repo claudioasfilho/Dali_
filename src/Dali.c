@@ -766,7 +766,7 @@ void DisableInt1 ()
 }
 
 
-void DaliRXDecoding(int EntryMethod)
+void DaliRXDecoding(int EntryMethod, DALIMODE mode)
 {
 	static xdata DALI_FRAME State = IDLE;
 	int Entry;
@@ -841,7 +841,9 @@ void DaliRXDecoding(int EntryMethod)
 											if (State==ADDRESS)	//Reading Address
 											{
 												DaliRXReg.Address= DaliData.Abyte;
-												State=DATA;
+
+												if (mode==SLAVE_MODE)	State=DATA;
+												else State=STOP;
 											}
 											else				//Reading Data
 											{

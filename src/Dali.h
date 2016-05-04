@@ -17,6 +17,10 @@
 #include <SI_EFM8UB1_Register_Enums.h>
 //#include "InitDevice.h"
 
+//#define DALISLAVEMODE
+#define DALIMASTERMODE
+
+
 typedef union bits_byte
 				{
 					struct{
@@ -83,6 +87,13 @@ typedef enum
 #define DALI_LOGIC_1 1
 #define DALI_LOGIC_0 0
 
+//This definition is used for the Dali RX Module to determine if the data being received should be perceived as Master (Receives 1 byte of data) or Slave (2 bytes- Address and Data)
+typedef enum
+{
+	SLAVE_MODE,
+	MASTER_MODE
+}DALIMODE;
+
 //-----------------------------------------------------------------------------
 // Hardware Related Definitions
 //-----------------------------------------------------------------------------
@@ -145,7 +156,7 @@ bit GetDaliStopFlag();
 
 //Dali RX
 
-void DaliRXDecoding(int EntryMethod);
+void DaliRXDecoding(int EntryMethod, DALIMODE mode);
 
 DALI_FRAME startconditionbitDemodulation();
 DALI_FRAME stopconditionbitverify();

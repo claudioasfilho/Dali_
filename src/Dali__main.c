@@ -35,11 +35,17 @@ void main (void)
    //ClearDaliFlags();
    while (1) {
 
+#ifdef DALIMASTERMODE
+
+
 	   if (PB0_SW==0) {
 
 		  DaliTXFrame(0xf0, 0x0f);
 		   for(fcounter=0; fcounter<0xffff; fcounter++);
 	   }
+
+
+#endif
 
 
 	   if (GetDaliDataReadyFlag()==1)
