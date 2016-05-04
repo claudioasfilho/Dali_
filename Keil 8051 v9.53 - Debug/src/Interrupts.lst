@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:19:10 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:27:54 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERRUPTS
@@ -27,100 +27,98 @@ line level    source
   12          #include "InitDevice.h"
   13          #include "Dali.h"
   14          
-  15          //extern bit MDone;
-  16          //extern bit MOutput;
-  17          
+  15          
+  16          //-----------------------------------------------------------------------------
+  17          // Global Constants
   18          //-----------------------------------------------------------------------------
-  19          // Global Constants
-  20          //-----------------------------------------------------------------------------
-  21          // Configurator set for HFOSC0/8
-  22          #define SYSCLK             3062000
-  23          
-  24          //static xdata DALI_FRAME State = START;
-  25          //static xdata uint8_t bitCounter = 0;
-  26          //static xdata uint8_t daliRXOutput=0;
-  27          //bit _1stHalf;
-  28          //bit _2ndHalf;
+  19          // Configurator set for HFOSC0/8
+  20          //#define SYSCLK             3062000
+  21          
+  22          //static xdata DALI_FRAME State = START;
+  23          //static xdata uint8_t bitCounter = 0;
+  24          //static xdata uint8_t daliRXOutput=0;
+  25          //bit _1stHalf;
+  26          //bit _2ndHalf;
+  27          
+  28          
   29          
   30          
   31          
-  32          
-  33          
+  32          //-----------------------------------------------------------------------------
+  33          // INT1_ISR
   34          //-----------------------------------------------------------------------------
-  35          // INT1_ISR
-  36          //-----------------------------------------------------------------------------
-  37          //
-  38          // TIMER0 ISR Content goes here. Remember to clear flag bits:
-  39          // TCON::TF0 (Timer 0 Overflow Flag)
+  35          //
+  36          // TIMER0 ISR Content goes here. Remember to clear flag bits:
+  37          // TCON::TF0 (Timer 0 Overflow Flag)
+  38          //
+  39          // Here we process the Timer0 interrupt and toggle the LED when appropriate
   40          //
-  41          // Here we process the Timer0 interrupt and toggle the LED when appropriate
-  42          //
-  43          //-----------------------------------------------------------------------------
-  44          SI_INTERRUPT (INT1_ISR, INT1_IRQn)
-  45          {
-  46   1      
-  47   1      #ifdef DALISLAVEMODE
+  41          //-----------------------------------------------------------------------------
+  42          SI_INTERRUPT (INT1_ISR, INT1_IRQn)
+  43          {
+  44   1      
+  45   1      #ifdef DALISLAVEMODE
               
                       DaliRXDecoding(1, SLAVE_MODE);
               #else
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:19:10 PAGE 2   
+  49   1      
+  50   1      
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:27:54 PAGE 2   
 
-  51   1      
+  51   1              DaliRXDecoding(1, MASTER_MODE);
   52   1      
-  53   1              DaliRXDecoding(1, MASTER_MODE);
-  54   1      
+  53   1      
+  54   1      #endif
   55   1      
-  56   1      #endif
-  57   1      
-  58   1      }
-  59          
-  60          
+  56   1      }
+  57          
+  58          
+  59          //-----------------------------------------------------------------------------
+  60          // Dali RX Timer TIMER1_ISR
   61          //-----------------------------------------------------------------------------
-  62          // Dali RX Timer TIMER1_ISR
-  63          //-----------------------------------------------------------------------------
-  64          //
-  65          // TIMER1 ISR Content goes here. Remember to clear flag bits:
-  66          // TCON::TF1 (Timer 0 Overflow Flag)
+  62          //
+  63          // TIMER1 ISR Content goes here. Remember to clear flag bits:
+  64          // TCON::TF1 (Timer 0 Overflow Flag)
+  65          //
+  66          // Here we process the Timer dedicated to Dali RX
   67          //
-  68          // Here we process the Timer dedicated to Dali RX
-  69          //
-  70          //-----------------------------------------------------------------------------
-  71          SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
-  72          {
-  73   1      
-  74   1      #ifdef DALISLAVEMODE
+  68          //-----------------------------------------------------------------------------
+  69          SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
+  70          {
+  71   1      
+  72   1      #ifdef DALISLAVEMODE
               
                       DaliRXDecoding(0, SLAVE_MODE);
               #else
+  76   1      
+  77   1              DaliRXDecoding(0, MASTER_MODE);
   78   1      
-  79   1              DaliRXDecoding(0, MASTER_MODE);
+  79   1      #endif
   80   1      
-  81   1      #endif
-  82   1      
-  83   1      }
-  84          
-  85          
+  81   1      }
+  82          
+  83          
+  84          //-----------------------------------------------------------------------------
+  85          // Dali TX Timer ISR (TIMER0)
   86          //-----------------------------------------------------------------------------
-  87          // Dali TX Timer ISR (TIMER0)
-  88          //-----------------------------------------------------------------------------
-  89          //
-  90          // TIMER0 ISR Content goes here. Remember to clear flag bits:
-  91          // TCON::TF0 (Timer 0 Overflow Flag)
+  87          //
+  88          // TIMER0 ISR Content goes here. Remember to clear flag bits:
+  89          // TCON::TF0 (Timer 0 Overflow Flag)
+  90          //
+  91          // Here we process the Timer0 interrupt and toggle the LED when appropriate
   92          //
-  93          // Here we process the Timer0 interrupt and toggle the LED when appropriate
-  94          //
-  95          //-----------------------------------------------------------------------------
-  96          SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
-  97          {
-  98   1      
-  99   1      
- 100   1              ReloadDaliTxTimer(TMH, TML);
- 101   1              ManchesterTXHandler();
- 102   1              IsDaliBusQuiet();
- 103   1      
- 104   1      }
- 105          
- 106          
+  93          //-----------------------------------------------------------------------------
+  94          SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
+  95          {
+  96   1      
+  97   1      
+  98   1              ReloadDaliTxTimer(TMH, TML);
+  99   1              ManchesterTXHandler();
+ 100   1              IsDaliBusQuiet();
+ 101   1      
+ 102   1      }
+ 103          
+ 104          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -128,10 +126,10 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:19:10 PAGE 3   
-
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
+C51 COMPILER V9.53.0.0   INTERRUPTS                                                        05/04/2016 15:27:54 PAGE 3   
+
    BIT SIZE         =   ----    ----
    EDATA SIZE       =   ----    ----
    HDATA SIZE       =   ----    ----

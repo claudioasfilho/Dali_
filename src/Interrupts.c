@@ -12,14 +12,12 @@
 #include "InitDevice.h"
 #include "Dali.h"
 
-//extern bit MDone;
-//extern bit MOutput;
 
 //-----------------------------------------------------------------------------
 // Global Constants
 //-----------------------------------------------------------------------------
 // Configurator set for HFOSC0/8
-#define SYSCLK             3062000
+//#define SYSCLK             3062000
 
 //static xdata DALI_FRAME State = START;
 //static xdata uint8_t bitCounter = 0;
