@@ -32,6 +32,7 @@ void main (void)
 //   SetDaliInputPinPolarity(ACTIVE_LOW);
 
 
+   //ClearDaliFlags();
    while (1) {
 
 	   if (PB0_SW==0) {
@@ -40,9 +41,10 @@ void main (void)
 		   for(fcounter=0; fcounter<0xffff; fcounter++);
 	   }
 
-	   if (GetBusyFlag()==1)
+
+	   if (GetDaliDataReadyFlag()==1)
 	   {
-		   ClearBusyFlag();
+		   ClearDaliDataReadyFlag();
 		   DaliAnswerFrame(0xff);
 
 	   }

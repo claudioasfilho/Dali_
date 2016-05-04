@@ -81,12 +81,12 @@ bit GetBusyFlag()
 
 /*Manchester Decoder Output Flag Getters and Setters*/
 
-void SetMDOutput()
-{
+void SetMDOutput()			//This function is processed by the ManchesterTXHandler and sets the DALI Output to Logic 1
+{							//It is not setting the pin, but the logical state
 	DaliFlags.flag.Output =1;
 }
 
-void ClearMDOutput()
+void ClearMDOutput()		//This function is processed by the ManchesterTXHandler and sets the DALI Output to Logic 0
 {
 	DaliFlags.flag.Output =0;
 }
@@ -161,7 +161,7 @@ void ManchesterEncoder (uint8_t input)
  *********************************************************************************
  *********************************************************************************/
 
-void DaliTxHandler()
+void ManchesterTXHandler()
 {
 	static uint8_t counter = 0;
 	static uint8_t evcounter = 0;
@@ -346,6 +346,10 @@ bit GetDaliStopFlag()
  return DaliFlags.flag.Stop;
 }
 
+void ClearDaliFlags()
+{
+	DaliFlags.DRegister=0;
+}
 
 void SetDaliOutputPin()
 {
@@ -382,13 +386,6 @@ DALI_FRAME startconditionbitDemodulation()
 {
 	static xdata DALI_DEMOD bitState = _1qB;
 
-	static xdata uint8_t DebugCounter=0;
-
-	if (DebugCounter==1)
-	{
-		ToogleTestLed5();
-		_1stQ = GetDaliIntputPin();
-	}
 
 	switch (bitState)
 	{
@@ -400,7 +397,6 @@ DALI_FRAME startconditionbitDemodulation()
 
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _2qB;
-				//ToogleTestLed();
 			}
 			else
 			{
@@ -421,7 +417,7 @@ DALI_FRAME startconditionbitDemodulation()
 				SetDaliInputPinPolarity(ACTIVE_HIGH);
 				EnableInt1();
 				bitState = _3qB;
-				//ToogleTestLed();
+
 			}
 			else
 			{
@@ -441,7 +437,7 @@ DALI_FRAME startconditionbitDemodulation()
 
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _4qB;
-				//ToogleTestLed();
+
 
 			}
 			else
@@ -459,12 +455,10 @@ DALI_FRAME startconditionbitDemodulation()
 			if((GetDaliIntputPin()==DALI_LOGIC_1))
 			{
 
-				DebugCounter++;
-
 				DisableInt1();
 				ReloadnStartDaliRxTimer(STMH, STML);
 				bitState = _1qB;
-				//ToogleTestLed();
+
 				return ADDRESS; //Processing is done. It resets this state machine and moves the main state machine to the next state
 			}
 			else
@@ -496,7 +490,6 @@ DALI_FRAME stopconditionbitverify()
 				_1stQ = GetDaliIntputPin();
 				ReloadDaliRxTimer(TMH, TML);
 				bitState = _2qB;
-				ToogleTestLed3();
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 			{
@@ -514,7 +507,6 @@ DALI_FRAME stopconditionbitverify()
 				_2ndQ = GetDaliIntputPin();
 				ReloadDaliRxTimer(TMH, TML);
 				bitState = _3qB;
-				ToogleTestLed3();
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
 			{
@@ -532,7 +524,6 @@ DALI_FRAME stopconditionbitverify()
 				_3rdQ = GetDaliIntputPin();
 				ReloadDaliRxTimer(TMH, TML);
 				bitState = _4qB;
-				ToogleTestLed3();
 
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
@@ -550,7 +541,6 @@ DALI_FRAME stopconditionbitverify()
 
 				_4thQ = GetDaliIntputPin();
 				bitState = _1qB;
-				ToogleTestLed3();
 				return END; //Processing is done. It resets this state machine and moves the main state machine to the next state
 			}
 			else //If the bit is corrupted, the device goes to ERRORRESET MODE
@@ -742,6 +732,20 @@ bit GetDaliRxErrorFlag()
 	return DaliFlags.flag.Error;
 }
 
+void SetDaliDataReadyFlag()
+{
+	DaliFlags.flag.Dataready = 1;
+}
+
+void ClearDaliDataReadyFlag()
+{
+	DaliFlags.flag.Dataready = 0;
+}
+
+bit GetDaliDataReadyFlag()
+{
+	return DaliFlags.flag.Dataready;
+}
 
 void SetDaliInputPinPolarity (INTPOLARITY input)
 {
@@ -782,7 +786,7 @@ void DaliRXDecoding(int EntryMethod)
 		   						if (GetBusQuietCounter()>1) State = START;
 		   						DaliData.Abyte=0;
 		   						DaliFlags.DRegister=0;		//It resets all the Flags
-		   						DaliFlags.flag.Busy=1;		//It sets the Flag indicating the Dali Rx is busy
+		   						DaliFlags.flag.RXBusy=1;		//It sets the Flag indicating the Dali Rx is busy
 
 		   						//This Jumps straight to the next State on the State Machine so we don't loose a cycle, it purposely doesn't have a break
 		   					}
@@ -870,25 +874,22 @@ void DaliRXDecoding(int EntryMethod)
 				case END:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
 		   					{
 		   						State = IDLE;
-		   						ToogleTestLed2();
 		   						ErrorLog = IDLE;
 		   						StopnDisableDaliRxTimer();
-		   						//INTERRUPT_0_enter_DefaultMode_from_RESET();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
-		   					//	TCON=0;
 		   						DaliFlags.flag.Dataready = 1;
+		   						DaliFlags.flag.RXBusy=0;		//It Clears the Flag indicating the Dali Rx is not busy
 		   						break;
 		   					}
 
 				case ERRORRESET:			//In this state, it Resets the state machine and Turn on the Data Ready Flag
 		   					{
 		   						State = IDLE;
-		   						//ToogleTestLed5();
 		   						StopnDisableDaliRxTimer();
 		   						SetDaliInputPinPolarity(ACTIVE_LOW);
 		   						EnableInt1();
-		   					//	TCON=0;
+
 								DaliFlags.flag.Error = 1;
 		   						break;
 		   					}

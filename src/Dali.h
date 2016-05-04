@@ -41,7 +41,7 @@ typedef union daliflags
 								uint8_t Stop:1;
 								uint8_t Error:1;
 								uint8_t Dataready:1;
-								uint8_t NU2:1;
+								uint8_t RXBusy:1;
 								uint8_t NU3:1;
 								uint8_t NU4:1;
 							} flag;
@@ -101,11 +101,11 @@ SI_SBIT (LED4,SFR_P3, 1);			   //Test LED
 SI_SBIT (LED5,SFR_P0, 4);			   //Test LED
 
 #define DisableDisplay() EFM_DISP_ENABLE=0;
-#define ToogleTestLed1() LED1^=1;//LED5^=1;
-#define ToogleTestLed2() LED2^=1;//LED5^=1;
-#define ToogleTestLed3() LED3^=1;//LED5^=1;
-#define ToogleTestLed4() LED4^=1;//LED5^=1;
-#define ToogleTestLed5() LED5^=1;
+//#define ToogleTestLed1() LED1^=1;//LED5^=1;
+//#define ToogleTestLed2() LED2^=1;//LED5^=1;
+//#define ToogleTestLed3() LED3^=1;//LED5^=1;
+//#define ToogleTestLed4() LED4^=1;//LED5^=1;
+//#define ToogleTestLed5() LED5^=1;
 
 
 
@@ -132,10 +132,11 @@ void DaliFrameStop();
 void DaliTXFrame(uint8_t address, uint8_t Ddata);
 void DaliAnswerFrame(uint8_t Ddata);
 
+void ClearDaliFlags();
 void SetDaliOutputPin();
 void ClearDaliOutputPin();
 bit GetDaliOutputPin();
-void DaliTxHandler();
+void ManchesterTXHandler();
 
 void SetDaliStopFlag();
 void ClearDaliStopFlag();
@@ -167,6 +168,10 @@ void IsDaliBusQuiet();
 void IncBusQuietCounter();
 void ClearBusQuietCounter();
 uint8_t GetBusQuietCounter();
+void SetDaliDataReadyFlag();
+void ClearDaliDataReadyFlag();
+bit GetDaliDataReadyFlag();
+
 
 void SetDaliInputPinPolarity (INTPOLARITY input);
 void EnableInt1 ();

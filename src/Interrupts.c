@@ -62,7 +62,6 @@ SI_INTERRUPT (INT1_ISR, INT1_IRQn)
 SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
 {
 
-	ToogleTestLed4();
 	DaliRXDecoding(0);
 
 }
@@ -82,7 +81,7 @@ SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
 {
 
 	ReloadDaliTxTimer(TMH, TML);
-	DaliTxHandler();
+	ManchesterTXHandler();
 	IsDaliBusQuiet();
 
 }
