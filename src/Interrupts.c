@@ -76,7 +76,6 @@ SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
 	DaliRXDecoding(0, SLAVE_MODE);
 #else
 
-
 	DaliRXDecoding(0, MASTER_MODE);
 
 #endif
@@ -96,6 +95,7 @@ SI_INTERRUPT (TIMER1_ISR, TIMER1_IRQn)
 //-----------------------------------------------------------------------------
 SI_INTERRUPT (TIMER0_ISR, TIMER0_IRQn)
 {
+
 
 	ReloadDaliTxTimer(TMH, TML);
 	ManchesterTXHandler();

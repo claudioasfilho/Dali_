@@ -8,14 +8,21 @@
 #ifndef __DALI_H__
 #define __DALI_H__
 
+ /* The TMH and TML are the reload values to the Dali RX and TX Timer. Those values generate an interrupt period of 416.5us,
+  * which is represents 1/2 of the The Dali Period(833us) */
 #define TMH	0xff
 #define TML	0x2B
 
+ /* The TMH and TML are the reload values to the Dali RX and TX Timer. Those values generate an interrupt period of 208.25us,
+  * which is represents 1/4 of the The Dali Period(833us) */
 #define STMH TMH
-#define STML 0x96//0x95
+#define STML 0x96
+
 //-----------------------------------------------------------------------------
 #include <SI_EFM8UB1_Register_Enums.h>
 //#include "InitDevice.h"
+
+/*The Definitions below put the Device in Master or Slave Mode*/
 
 //#define DALISLAVEMODE
 #define DALIMASTERMODE
@@ -112,7 +119,7 @@ SI_SBIT (LED4,SFR_P3, 1);			   //Test LED
 SI_SBIT (LED5,SFR_P0, 4);			   //Test LED
 
 #define DisableDisplay() EFM_DISP_ENABLE=0;
-//#define ToogleTestLed1() LED1^=1;//LED5^=1;
+#define ToogleTestLed1() LED1^=1;//LED5^=1;
 //#define ToogleTestLed2() LED2^=1;//LED5^=1;
 //#define ToogleTestLed3() LED3^=1;//LED5^=1;
 //#define ToogleTestLed4() LED4^=1;//LED5^=1;

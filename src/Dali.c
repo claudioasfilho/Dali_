@@ -155,12 +155,10 @@ void ManchesterEncoder (uint8_t input)
 
 }
 
-/*********************************************************************************
- *********************************************************************************
- 	 	 	 	 	 Dali TX Related Functions
- *********************************************************************************
- *********************************************************************************/
-
+/*This is the function that implements the decoding it self. It is fed with the Busyflag and it sets and clears the I/O depending
+ * on state of the Logic bit to be transmitted
+ * This function has to be called from a timer with a period of 416.5us, which represents half of the Manchester bit size.
+ * The Dali Period = 833us, so it is 833/2 = 433.5us */
 void ManchesterTXHandler()
 {
 	static uint8_t counter = 0;
@@ -205,6 +203,13 @@ void ManchesterTXHandler()
 
 }
 
+
+
+/*********************************************************************************
+ *********************************************************************************
+ 	 	 	 	 	 Dali TX Related Functions
+ *********************************************************************************
+ *********************************************************************************/
 
 void ReloadDaliTxTimer(uint8_t reloadH, uint8_t reloadL)
 {
