@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 1   
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE DALI
@@ -58,13 +58,17 @@ line level    source
   43          #include <SI_EFM8UB1_Register_Enums.h>
   44          #include "InitDevice.h"
   45          #include "Dali.h"
+*** ERROR C141 IN LINE 91 OF C:\Users\clfilho\Dropbox (Silicon Labs)\Code_Workspace_Dali\Dali_\src\DaliCommands.h: synta
+             -x error near ';'
+*** ERROR C141 IN LINE 93 OF C:\Users\clfilho\Dropbox (Silicon Labs)\Code_Workspace_Dali\Dali_\src\DaliCommands.h: synta
+             -x error near '}'
   46          
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 2   
+
   47          
   48          
   49          
   50          //bit MDone;
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 2   
-
   51          //bit MOutput;
   52          //bit DaliStopFlag;
   53          //bit DaliErrorFlag;
@@ -124,12 +128,12 @@ line level    source
              -lude the last bit before it loads the counter again
  105   1      
  106   1              ClearBusyFlag();
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 3   
+
  107   1      
  108   1              if (counter==8)
  109   1              {
  110   2                      Input.Abyte = input;
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 3   
-
  111   2              }
  112   1      
  113   1              while (counter>=0)
@@ -189,12 +193,12 @@ line level    source
  165   1              static uint8_t evcounter = 0;
  166   1      
  167   1              if (GetBusyFlag())
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 4   
+
  168   1              {
  169   2                      if (evcounter++==15)
  170   2                              {evcounter=0;}
  171   2                      if (GetDaliStopFlag()==0)               //Are these the Stop Bits?
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 4   
-
  172   2                      {
  173   3      
  174   3                              //The next lines implement the two steps of the Manchester Decoding
@@ -254,12 +258,12 @@ line level    source
  228          uint16_t GetDaliTxTimer()
  229          {
  230   1              return TH0|TL0;
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 5   
+
  231   1      }
  232          
  233          
  234          void StopDaliTxTimer()
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 5   
-
  235          {
  236   1      
  237   1              TH1 = 0;
@@ -319,12 +323,12 @@ line level    source
  291   4                                                              DaliFrameStop();
  292   4                                                              States= END;
  293   4                                                              break;
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 6   
+
  294   4                                                      }
  295   3      
  296   3                      }
  297   2              }
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 6   
-
  298   1      
  299   1      }
  300          
@@ -384,12 +388,12 @@ line level    source
  354          void ClearDaliFlags()
  355          {
  356   1              DaliFlags.DRegister=0;
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 7   
+
  357   1      }
  358          
  359          void SetDaliOutputPin()
  360          {
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 7   
-
  361   1              DALI_OUT=1;
  362   1      }
  363          
@@ -449,12 +453,12 @@ line level    source
  417   3                              _2ndQ = GetDaliIntputPin();
  418   3                              if((GetDaliIntputPin()==DALI_LOGIC_0))
  419   3                              {
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 8   
+
  420   4      
  421   4                                      StopnDisableDaliRxTimer();
  422   4                                      SetDaliInputPinPolarity(ACTIVE_HIGH);
  423   4                                      EnableInt1();
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 8   
-
  424   4                                      bitState = _3qB;
  425   4      
  426   4                              }
@@ -514,12 +518,12 @@ line level    source
  478   2              }
  479   1      
  480   1              return START; //Still Processing the Bit
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 9   
+
  481   1      }
  482          
  483          DALI_FRAME stopconditionbitverify()
  484          {
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 9   
-
  485   1              static xdata DALI_DEMOD bitState = _1qB;
  486   1      
  487   1      
@@ -579,12 +583,12 @@ line level    source
  541   3                      }
  542   2                      case _4qB: //This is Triggered by the TIMER1_ISR, once completed successfully it disables the INT1 and i
              -t uses the Timer to check the DALI_IN State
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 10  
+
  543   2                      {
  544   3                              if((GetDaliIntputPin()==DALI_LOGIC_1))
  545   3                              {
  546   4      
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 10  
-
  547   4                                      _4thQ = GetDaliIntputPin();
  548   4                                      bitState = _1qB;
  549   4                                      return END; //Processing is done. It resets this state machine and moves the main state machine to the
@@ -644,12 +648,12 @@ line level    source
  602   3      
  603   3                                      _4thQ = GetDaliIntputPin();
  604   3                                      ReloadnStartDaliRxTimer(STMH, STML);
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 11  
+
  605   3                                      bitState = _1qB;
  606   3                                      //ToogleTestLed4();
  607   3                                      return 1; //Processing is done. It resets this state machine and informs user the bit information is a
              -vailable
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 11  
-
  608   3                                      break;
  609   3                              }
  610   2                      }
@@ -709,12 +713,12 @@ line level    source
  661   1              StartDaliRxTimer();
  662   1      }
  663          
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 12  
+
  664          void StopnDisableDaliRxTimer()
  665          {
  666   1      
  667   1              StopDaliRxTimer();
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 12  
-
  668   1              DisableDaliRxTimerInt();
  669   1      }
  670          
@@ -774,12 +778,12 @@ line level    source
  724          
  725          void SetDaliRxErrorFlag()
  726          {
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 13  
+
  727   1              DaliFlags.flag.Error = 1;
  728   1      }
  729          
  730          void ClearDaliRxErrorFlag()
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 13  
-
  731          {
  732   1              DaliFlags.flag.Error = 0;
  733   1      }
@@ -839,12 +843,12 @@ line level    source
  787   1              int Entry;
  788   1      
  789   1              static xdata BITS_BYTE DaliData;                //Variable used to temporarily store the bits being read from the Dali 
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 14  
+
              -Command
  790   1              static xdata uint8_t bitscounter=7;             //Keeps the position of the current bit being read
  791   1              int bitread=0;                                                  //Used to store the current bit being read. if the value is -1, it means the data wa
              -s invalid
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 14  
-
  792   1      
  793   1              Entry=EntryMethod;
  794   1      
@@ -904,12 +908,12 @@ line level    source
  846   6                                                                                              case 6: DaliData.nybble.BB6 = bitread;
  847   6                                                                                                              break;
  848   6      
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 15  
+
  849   6                                                                                              case 7: DaliData.nybble.BB7 = bitread;
  850   6                                                                                                              break;
  851   6                                                                                      }
  852   5                                                                                      if(bitscounter--==0)
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 15  
-
  853   5                                                                                      {
  854   6      
  855   6                                                                                              bitscounter=7;
@@ -969,31 +973,15 @@ line level    source
  909   3      
  910   3                                                                      DaliFlags.flag.Error = 1;
  911   3                                                                      break;
+C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 17:25:46 PAGE 16  
+
  912   3                                                              }
  913   2      
  914   2                                      default: State=IDLE;
  915   2      
-C51 COMPILER V9.53.0.0   DALI                                                              05/04/2016 15:19:09 PAGE 16  
-
  916   2      
  917   2      
  918   2                              }
  919   1      }
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1545    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     10    ----
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =      5       8
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =      4    ----
-   EDATA SIZE       =   ----    ----
-   HDATA SIZE       =   ----    ----
-   XDATA CONST SIZE =   ----    ----
-   FAR CONST SIZE   =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  2 ERROR(S)

@@ -8,6 +8,8 @@
 #ifndef __DALI_H__
 #define __DALI_H__
 
+#include "DaliCommands.h"
+
  /* The TMH and TML are the reload values to the Dali RX and TX Timer. Those values generate an interrupt period of 416.5us,
   * which is represents 1/2 of the The Dali Period(833us) */
 #define TMH	0xff

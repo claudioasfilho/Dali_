@@ -27,13 +27,6 @@ void main (void)
    TCON &= 0xF7; //Add this line
    IE_EA = 1; // Enable global interrupts
 
-   IE_EA = 1;                          		// Enable global interrupts
-   //PRTDRV |=0x1;							//Enable high drive strength on P0
-
-  // SetDaliInputPinPolarity(ACTIVE_LOW);
-
-
-
    ClearDaliFlags();
    ClearDaliRXData();
 
