@@ -1,11 +1,11 @@
-LX51 LINKER/LOCATER V4.66.30.0                                                          05/04/2016  17:25:04  PAGE 1
+LX51 LINKER/LOCATER V4.66.30.0                                                          11/09/2016  15:43:41  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.66.30.0, INVOKED BY:
-C:\SILICONLABS\SIMPLICITYSTUDIO\V3_3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\BIN\LX51.EXE ./src/Dali.OBJ, ./src/Dali__main.O
->> BJ, ./src/InitDevice.OBJ, ./src/Interrupts.OBJ, ./src/SILABS_STARTUP.OBJ TO DALI_.OMF.CRBUILD REMOVEUNUSED PRINT (.\D
->> ali_.m51) PAGEWIDTH (120) PAGELENGTH (65) CLASSES (CODE (C:0X0-C:0X3FFE), CONST (C:0X0-C:0X3FFE), ECODE (C:0X0-C:0X3F
->> FE), HCONST (C:0X0-C:0X3FFE), XDATA (X:0X0-X:0X3FF), HDATA (X:0X0-X:0X3FF))
+C:\SILICONLABS\SIMPLICITYSTUDIO\V3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\BIN\LX51.EXE ./src/Dali.OBJ, ./src/Dali__main.OBJ
+>> , ./src/InitDevice.OBJ, ./src/Interrupts.OBJ, ./src/SILABS_STARTUP.OBJ TO DALI_.OMF.CRBUILD REMOVEUNUSED PRINT (.\Dal
+>> i_.m51) PAGEWIDTH (120) PAGELENGTH (65) CLASSES (CODE (C:0X0-C:0X3FFE), CONST (C:0X0-C:0X3FFE), ECODE (C:0X0-C:0X3FFE
+>> ), HCONST (C:0X0-C:0X3FFE), XDATA (X:0X0-X:0X3FF), HDATA (X:0X0-X:0X3FF))
 
 
 CPU MODE:     8051 MODE
@@ -23,9 +23,9 @@ INPUT MODULES INCLUDED:
          COMMENT TYPE 0: C51 V9.53.0.0
   ./src/SILABS_STARTUP.OBJ (?C_STARTUP)
          COMMENT TYPE 0: AX51 V3.12.0.0
-  C:\SILICONLABS\SIMPLICITYSTUDIO\V3_3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\LIB\C51S.LIB (?C_INIT)
+  C:\SILICONLABS\SIMPLICITYSTUDIO\V3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\LIB\C51S.LIB (?C_INIT)
          COMMENT TYPE 1: A51 / ASM51 Assembler
-  C:\SILICONLABS\SIMPLICITYSTUDIO\V3_3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\LIB\C51S.LIB (?C?COPY)
+  C:\SILICONLABS\SIMPLICITYSTUDIO\V3\DEVELOPER\TOOLCHAINS\KEIL_8051\9.53\LIB\C51S.LIB (?C?COPY)
          COMMENT TYPE 1: A51 / ASM51 Assembler
 
 
@@ -64,7 +64,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 000003H   00000AH   000008H   BYTE   UNIT     CODE           ?PR?SETBUSYFLAG?DALI
 00000BH   00000DH   000003H   BYTE   OFFS..   CODE           ?INTERRUPTS?0000B
 00000EH   000012H   000005H   BYTE   UNIT     CODE           ?PR?_RELOADDALITXTIMER?DALI
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 2
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 2
 
 
 000013H   000015H   000003H   BYTE   OFFS..   CODE           ?INTERRUPTS?00013
@@ -129,7 +129,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 00000AH   00000BH   000002H   BYTE   UNIT     XDATA          ?XD?DALI__MAIN
 
 * * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 3
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 3
 
 
    *DEL*:           000008H   BYTE   UNIT     CODE           ?PR?CLEARMDOUTPUT?DALI
@@ -194,7 +194,7 @@ STOPNDISABLEDALIRXTIMER/DALI                  ----- -----  ----- -----
 STOPDALIRXTIMER/DALI                          ----- -----  ----- -----
 
 DISABLEDALIRXTIMERINT/DALI                    ----- -----  ----- -----
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 4
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 4
 
 
 
@@ -259,7 +259,7 @@ ISDALIBUSQUIET/DALI                           ----- -----  ----- -----
   +--> INCBUSQUIETCOUNTER/DALI
   +--> CLEARBUSQUIETCOUNTER/DALI
 
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 5
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 5
 
 
 INCBUSQUIETCOUNTER/DALI                       ----- -----  ----- -----
@@ -324,7 +324,7 @@ DALIFRAMESTART/DALI                           ----- -----  ----- -----
   +--> GETBUSYFLAG/DALI
 
 SETMDOUTPUT/DALI                              ----- -----  ----- -----
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 6
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 6
 
 
 
@@ -389,7 +389,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 000000BCH   DATA     BYTE      ADC0CF
 *SFR* 000000E8H   DATA     BYTE      ADC0CN0
 *SFR* 000000E8H.6 DATA     BIT       ADC0CN0_ADBMEN
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 7
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 7
 
 
 *SFR* 000000E8H.4 DATA     BIT       ADC0CN0_ADBUSY
@@ -454,7 +454,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000799H   CODE     ---       DaliFrameStart
       010007A8H   CODE     ---       DaliFrameStop
       0200000AH   XDATA    ---       DaliRead
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 8
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 8
 
 
 *SFR* 000000ADH   DATA     BYTE      DERIVID
@@ -519,7 +519,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 000000B8H   DATA     BIT       IP_PX0
 *SFR* 000000B8H.2 DATA     BIT       IP_PX1
 *SFR* 000000F2H   DATA     BYTE      IPH
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 9
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 9
 
 
       01000713H   CODE     ---       isbitHighorLow
@@ -584,7 +584,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 000000D8H   DATA     BYTE      PCA0CN0
 *SFR* 000000D8H   DATA     BIT       PCA0CN0_CCF0
 *SFR* 000000D8H.1 DATA     BIT       PCA0CN0_CCF1
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 10
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 10
 
 
 *SFR* 000000D8H.2 DATA     BIT       PCA0CN0_CCF2
@@ -649,7 +649,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 000000C8H.4 DATA     BIT       SCON1_REN
 *SFR* 000000C8H   DATA     BIT       SCON1_RI
 *SFR* 000000C8H.3 DATA     BIT       SCON1_TBX
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 11
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 11
 
 
 *SFR* 000000C8H.1 DATA     BIT       SCON1_TI
@@ -714,7 +714,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 00000088H.4 DATA     BIT       TCON_TR0
 *SFR* 00000088H.6 DATA     BIT       TCON_TR1
 *SFR* 0000008CH   DATA     BYTE      TH0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 12
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 12
 
 
 *SFR* 0000008DH   DATA     BYTE      TH1
@@ -779,7 +779,7 @@ PUBLIC SYMBOLS OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 *SFR* 0000009EH   DATA     BYTE      UART1LIN
 *SFR* 000000AEH   DATA     BYTE      USB0ADR
 *SFR* 000000B2H   DATA     BYTE      USB0AEC
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 13
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 13
 
 
 *SFR* 000000B6H   DATA     BYTE      USB0CDCF
@@ -844,7 +844,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000521H   PUBLIC    CODE     ---       ManchesterTXHandler
       010002FAH   PUBLIC    CODE     ---       _ManchesterEncoder
       0100082EH   PUBLIC    CODE     ---       GetMDOutput
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 14
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 14
 
 
       01000826H   PUBLIC    CODE     ---       SetMDOutput
@@ -909,7 +909,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000FBH   SFRSYM    DATA     BYTE      PCA0CPL0
       000000F0H.3 SFRSYM    DATA     BIT       B_B3
       000000D9H   SFRSYM    DATA     BYTE      PCA0MD
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 15
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 15
 
 
       000000DAH   SFRSYM    DATA     BYTE      PCA0CPM0
@@ -974,7 +974,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000ACH   SFRSYM    DATA     BYTE      SMB0TC
       000000F2H   SFRSYM    DATA     BYTE      P1MDIN
       000000C8H.4 SFRSYM    DATA     BIT       SCON1_REN
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 16
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 16
 
 
       000000F3H   SFRSYM    DATA     BYTE      P2MDIN
@@ -1039,7 +1039,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000D8H   SFRSYM    DATA     BYTE      PCA0CN0
       000000E0H   SFRSYM    DATA     BYTE      ACC
       000000FBH   SFRSYM    DATA     WORD      PCA0CP0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 17
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 17
 
 
       000000E9H   SFRSYM    DATA     WORD      PCA0CP1
@@ -1104,7 +1104,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       00000090H.7 SFRSYM    DATA     BIT       P1_B7
       00000083H   SFRSYM    DATA     BYTE      DPH
       000000C4H   SFRSYM    DATA     BYTE      ADC0GTH
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 18
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 18
 
 
       000000C8H.7 SFRSYM    DATA     BIT       TMR2CN0_TF2H
@@ -1169,7 +1169,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000CDH   SFRSYM    DATA     BYTE      TMR2H
       000000A1H   SFRSYM    DATA     BYTE      SPI0CFG
       00000095H   SFRSYM    DATA     BYTE      TMR3H
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 19
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 19
 
 
       000000EFH   SFRSYM    DATA     BYTE      HFOCN
@@ -1234,7 +1234,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000826H   BLOCK     CODE     ---       LVL=0
       01000826H   LINE      CODE     ---       #84
       01000826H   LINE      CODE     ---       #85
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 20
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 20
 
 
       01000826H   LINE      CODE     ---       #86
@@ -1299,7 +1299,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       010003A1H   LINE      CODE     ---       #154
       010003A4H   LINE      CODE     ---       #156
       ---         BLOCKEND  ---      ---       LVL=0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 21
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 21
 
 
 
@@ -1364,7 +1364,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 
       010007A8H   BLOCK     CODE     ---       LVL=0
       010007A8H   LINE      CODE     ---       #252
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 22
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 22
 
 
       010007A8H   LINE      CODE     ---       #253
@@ -1429,7 +1429,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000845H   LINE      CODE     ---       #347
       ---         BLOCKEND  ---      ---       LVL=0
 
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 23
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 23
 
 
       010007F8H   BLOCK     CODE     ---       LVL=0
@@ -1494,7 +1494,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000474H   LINE      CODE     ---       #431
       01000476H   LINE      CODE     ---       #432
       01000476H   LINE      CODE     ---       #433
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 24
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 24
 
 
       01000476H   LINE      CODE     ---       #434
@@ -1559,7 +1559,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       010004DBH   LINE      CODE     ---       #512
       010004E0H   LINE      CODE     ---       #513
       010004E3H   LINE      CODE     ---       #514
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 25
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 25
 
 
       010004E9H   LINE      CODE     ---       #515
@@ -1624,7 +1624,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       0100059FH   LINE      CODE     ---       #585
       010005A5H   LINE      CODE     ---       #587
       010005A7H   LINE      CODE     ---       #588
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 26
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 26
 
 
       010005A7H   LINE      CODE     ---       #590
@@ -1689,7 +1689,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       ---         BLOCKEND  ---      ---       LVL=0
 
       01000810H   BLOCK     CODE     ---       LVL=0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 27
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 27
 
 
       00000007H   SYMBOL    DATA     BYTE      reloadH
@@ -1754,7 +1754,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 
       010008A3H   BLOCK     CODE     ---       LVL=0
       010008A3H   LINE      CODE     ---       #709
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 28
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 28
 
 
       010008A3H   LINE      CODE     ---       #710
@@ -1819,7 +1819,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       0100085DH   LINE      CODE     ---       #774
       0100085DH   LINE      CODE     ---       #775
       01000863H   LINE      CODE     ---       #776
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 29
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 29
 
 
       ---         BLOCKEND  ---      ---       LVL=0
@@ -1884,7 +1884,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       01000123H   LINE      CODE     ---       #843
       01000134H   LINE      CODE     ---       #844
       01000136H   LINE      CODE     ---       #846
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 30
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 30
 
 
       01000148H   LINE      CODE     ---       #847
@@ -1949,7 +1949,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       0200000AH   PUBLIC    XDATA    ---       DaliRead
       010005C8H   PUBLIC    CODE     ---       main
       000000A2H   SFRSYM    DATA     BYTE      SPI0CKR
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 31
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 31
 
 
       00000080H   SFRSYM    DATA     BYTE      P0
@@ -2014,7 +2014,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000D8H.7 SFRSYM    DATA     BIT       UART1FCN1_TFRQ
       000000F0H.4 SFRSYM    DATA     BIT       B_B4
       000000DBH   SFRSYM    DATA     BYTE      PCA0CPM1
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 32
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 32
 
 
       000000EBH   SFRSYM    DATA     BYTE      PCA0CPL2
@@ -2079,7 +2079,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000B6H   SFRSYM    DATA     BYTE      USB0CDCF
       000000F4H   SFRSYM    DATA     BYTE      P3MDIN
       000000B9H   SFRSYM    DATA     BYTE      I2C0STAT
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 33
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 33
 
 
       000000BBH   SFRSYM    DATA     BYTE      I2C0DOUT
@@ -2144,7 +2144,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000BCH   SFRSYM    DATA     BYTE      I2C0DIN
       000000CEH   SFRSYM    DATA     BYTE      CRC0CN0
       0000008CH   SFRSYM    DATA     BYTE      TH0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 34
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 34
 
 
       00000086H   SFRSYM    DATA     BYTE      CRC0CN1
@@ -2209,7 +2209,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000D0H.6 SFRSYM    DATA     BIT       PSW_AC
       000000F8H   SFRSYM    DATA     BYTE      SPI0CN0
       000000C7H   SFRSYM    DATA     BYTE      HFO0CAL
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 35
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 35
 
 
       00000088H.5 SFRSYM    DATA     BIT       TCON_TF0
@@ -2274,7 +2274,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000A5H   SFRSYM    DATA     BYTE      TMR4H
       00000098H.4 SFRSYM    DATA     BIT       TMR4CN0_TF4CEN
       000000EFH   SFRSYM    DATA     BYTE      SMB0FCT
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 36
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 36
 
 
       00000096H   SFRSYM    DATA     BYTE      PCA0POL
@@ -2339,7 +2339,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       010007E0H   PUBLIC    CODE     ---       INTERRUPT_0_enter_DefaultMode_from_RESET
       01000802H   PUBLIC    CODE     ---       TIMER_SETUP_0_enter_DefaultMode_from_RESET
       010007C5H   PUBLIC    CODE     ---       TIMER01_0_enter_DefaultMode_from_RESET
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 37
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 37
 
 
       0100086BH   PUBLIC    CODE     ---       PBCFG_0_enter_DefaultMode_from_RESET
@@ -2404,7 +2404,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000FBH   SFRSYM    DATA     BYTE      PCA0CPL0
       000000F0H.3 SFRSYM    DATA     BIT       B_B3
       000000D9H   SFRSYM    DATA     BYTE      PCA0MD
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 38
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 38
 
 
       000000DAH   SFRSYM    DATA     BYTE      PCA0CPM0
@@ -2469,7 +2469,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000ACH   SFRSYM    DATA     BYTE      SMB0TC
       000000F2H   SFRSYM    DATA     BYTE      P1MDIN
       000000C8H.4 SFRSYM    DATA     BIT       SCON1_REN
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 39
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 39
 
 
       000000F3H   SFRSYM    DATA     BYTE      P2MDIN
@@ -2534,7 +2534,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000D8H   SFRSYM    DATA     BYTE      PCA0CN0
       000000E0H   SFRSYM    DATA     BYTE      ACC
       000000FBH   SFRSYM    DATA     WORD      PCA0CP0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 40
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 40
 
 
       000000E9H   SFRSYM    DATA     WORD      PCA0CP1
@@ -2599,7 +2599,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       00000090H.7 SFRSYM    DATA     BIT       P1_B7
       00000083H   SFRSYM    DATA     BYTE      DPH
       000000C4H   SFRSYM    DATA     BYTE      ADC0GTH
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 41
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 41
 
 
       000000C8H.7 SFRSYM    DATA     BIT       TMR2CN0_TF2H
@@ -2664,7 +2664,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000CDH   SFRSYM    DATA     BYTE      TMR2H
       000000A1H   SFRSYM    DATA     BYTE      SPI0CFG
       00000095H   SFRSYM    DATA     BYTE      TMR3H
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 42
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 42
 
 
       000000EFH   SFRSYM    DATA     BYTE      HFOCN
@@ -2729,7 +2729,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       010007D3H   BLOCK     CODE     ---       LVL=0
       010007D3H   LINE      CODE     ---       #62
       010007D3H   LINE      CODE     ---       #76
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 43
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 43
 
 
       010007D6H   LINE      CODE     ---       #77
@@ -2794,7 +2794,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000E6H   SFRSYM    DATA     BYTE      EIE1
       000000C0H.1 SFRSYM    DATA     BIT       SMB0CN0_ACK
       000000B3H   SFRSYM    DATA     BYTE      USB0XCN
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 44
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 44
 
 
       000000CEH   SFRSYM    DATA     BYTE      EIE2
@@ -2859,7 +2859,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000E1H   SFRSYM    DATA     BYTE      XBR0
       000000C4H   SFRSYM    DATA     BYTE      SMB0FCN1
       000000C1H   SFRSYM    DATA     BYTE      SMB0CF
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 45
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 45
 
 
       000000E2H   SFRSYM    DATA     BYTE      XBR1
@@ -2924,7 +2924,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000F8H.4 SFRSYM    DATA     BIT       SPI0CN0_RXOVRN
       000000D0H.4 SFRSYM    DATA     BIT       PSW_RS1
       00000095H   SFRSYM    DATA     BYTE      SBRLL1
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 46
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 46
 
 
       000000C8H.2 SFRSYM    DATA     BIT       SCON1_RBX
@@ -2989,7 +2989,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       0000008AH   SFRSYM    DATA     BYTE      TL0
       000000D0H.5 SFRSYM    DATA     BIT       PSW_F0
       000000A8H.6 SFRSYM    DATA     BIT       IE_ESPI0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 47
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 47
 
 
       0000008BH   SFRSYM    DATA     BYTE      TL1
@@ -3054,7 +3054,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       00000098H.3 SFRSYM    DATA     BIT       TMR4CN0_T4SPLIT
       000000C8H.6 SFRSYM    DATA     BIT       TMR2CN0_TF2L
       00000098H.1 SFRSYM    DATA     BIT       SCON0_TI
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 48
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 48
 
 
       000000E8H   SFRSYM    DATA     BIT       ADC0CN0_ADCM0
@@ -3119,7 +3119,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
       000000C8H.5 SFRSYM    DATA     BIT       TMR2CN0_TF2LEN
       000000F8H.6 SFRSYM    DATA     BIT       SPI0CN0_WCOL
       000000F8H.2 SFRSYM    DATA     BIT       SPI0CN0_NSSMD0
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 49
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 49
 
 
       000000D0H.7 SFRSYM    DATA     BIT       PSW_CY
@@ -3184,7 +3184,7 @@ SYMBOL TABLE OF MODULE:  DALI_.OMF.CRBUILD (DALI)
 
       01000000H   BLOCK     CODE     NEAR LAB  LVL=0
       01000000H   LINE      CODE     ---       #126
-LX51 LINKER/LOCATER V4.66.30.0                                                        05/04/2016  17:25:04  PAGE 50
+LX51 LINKER/LOCATER V4.66.30.0                                                        11/09/2016  15:43:41  PAGE 50
 
 
       ---         BLOCKEND  ---      ---       LVL=0
